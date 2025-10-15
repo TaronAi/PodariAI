@@ -1,7 +1,13 @@
 
 import React from 'react';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  t: {
+    headerSubtitle: string;
+  };
+}
+
+const Header: React.FC<HeaderProps> = ({ t }) => {
   return (
     <header className="py-8 px-4 text-center">
       <h1 className="text-5xl md:text-6xl font-bold">
@@ -10,8 +16,7 @@ const Header: React.FC = () => {
         </span>
         <i className="fas fa-gift ml-3 text-pink-500 animate-pulse"></i>
       </h1>
-      <p className="text-slate-300 mt-3 text-lg">Ваш ИИ-помощник в выборе идеального подарка</p>
-      <p className="text-slate-500">(Your AI assistant for choosing the perfect gift)</p>
+      <p className="text-slate-300 mt-3 text-lg">{t.headerSubtitle}</p>
     </header>
   );
 };

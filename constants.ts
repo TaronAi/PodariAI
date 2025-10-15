@@ -1,100 +1,206 @@
 
-import { SurveyStepData, OptionType } from './types';
+import { SurveyStepData, OptionType, LocalizedString } from './types';
+
+export const i18n = {
+  ru: {
+    // Header
+    headerSubtitle: 'Ваш ИИ-помощник в выборе идеального подарка',
+    // SurveyStep
+    other: 'Другое',
+    submit: 'Подтвердить',
+    socialLinkPlaceholder: 'https://vk.com/example',
+    findGifts: 'Найти подарки',
+    skip: 'Пропустить',
+    // Loading Spinner
+    loadingMessages: [
+        "ИИ подбирает идеи...",
+        "Анализируем предпочтения...",
+        "Ищем вдохновение во вселенной!",
+        "Составляем список идеальных подарков...",
+        "Почти готово!",
+    ],
+    // Gift Opening
+    openingPresent: 'Открываем ваш подарок...',
+    // Gift Results
+    resultsTitle: 'Вот что мы подобрали для вас!',
+    whereToBuy: 'Где купить',
+    startOver: 'Начать заново',
+    addToWishlist: 'Добавить в вишлист',
+    removeFromWishlist: 'Удалить из вишлиста',
+    // Wishlist
+    wishlistTitle: 'Ваш вишлист',
+    wishlistEmpty: 'Ваш вишлист пуст.',
+    wishlistEmptyHint: 'Нажмите на сердечко на карточке подарка, чтобы добавить его сюда.',
+    closeWishlist: 'Закрыть вишлист',
+    remove: 'Удалить',
+    // Error
+    errorTitle: 'Произошла ошибка',
+    tryAgain: 'Попробовать снова',
+    // Why Podari
+    whyTitle: 'Почему Podari.AI?',
+    why1Title: 'Настоящий ИИ',
+    why1Desc: 'Не просто фильтры — наш ИИ учится и генерирует новые идеи, анализируя тысячи вариантов.',
+    why2Title: 'Все магазины сразу',
+    why2Desc: 'Мы находим лучшие варианты на Ozon, Wildberries и Яндекс.Маркете, чтобы вы могли сравнить.',
+    why3Title: 'Анализ соцсетей',
+    why3Desc: 'Опционально: вставьте ссылку на профиль, чтобы ИИ точнее угадал интересы человека.',
+    why4Title: 'Вишлисты и профили',
+    why4Desc: 'Сохраняйте идеи в вишлисты и создавайте профили для близких, чтобы не забыть о важных датах.',
+    why5Title: 'Широкий охват',
+    why5Desc: 'От физических товаров до подписок, впечатлений и нишевых подарков.',
+    why6Title: 'Прозрачность цен',
+    why6Desc: 'Показываем цены в разных магазинах, помогая вам сделать выгодный выбор.',
+  },
+  en: {
+    // Header
+    headerSubtitle: 'Your AI assistant for choosing the perfect gift',
+    // SurveyStep
+    other: 'Other',
+    submit: 'Submit',
+    socialLinkPlaceholder: 'https://instagram.com/example',
+    findGifts: 'Find Gifts',
+    skip: 'Skip',
+    // Loading Spinner
+    loadingMessages: [
+      "AI is crafting ideas...",
+      "Analyzing preferences...",
+      "Searching the universe for inspiration!",
+      "Compiling the perfect gift list...",
+      "Almost there!",
+    ],
+    // Gift Opening
+    openingPresent: 'Opening your present...',
+    // Gift Results
+    resultsTitle: 'Here are your gift ideas!',
+    whereToBuy: 'Where to buy',
+    startOver: 'Start Over',
+    addToWishlist: 'Add to wishlist',
+    removeFromWishlist: 'Remove from wishlist',
+    // Wishlist
+    wishlistTitle: 'Your Wishlist',
+    wishlistEmpty: 'Your wishlist is empty.',
+    wishlistEmptyHint: 'Click the heart on a gift card to add it here.',
+    closeWishlist: 'Close wishlist',
+    remove: 'Remove',
+    // Error
+    errorTitle: 'An Error Occurred',
+    tryAgain: 'Try Again',
+    // Why Podari
+    whyTitle: 'Why Podari.AI?',
+    why1Title: 'True AI',
+    why1Desc: 'Not just filters—our AI learns and generates new ideas by analyzing thousands of options.',
+    why2Title: 'All Stores at Once',
+    why2Desc: 'We find the best options on Ozon, Wildberries, and Yandex.Market so you can compare.',
+    why3Title: 'Social Media Analysis',
+    why3Desc: 'Optional: paste a profile link for the AI to more accurately guess the person\'s interests.',
+    why4Title: 'Wishlists & Profiles',
+    why4Desc: 'Save ideas to wishlists and create profiles for loved ones so you don\'t forget important dates.',
+    why5Title: 'Wide Scope',
+    why5Desc: 'From physical goods to subscriptions, experiences, and niche gifts.',
+    why6Title: 'Price Transparency',
+    why6Desc: 'We show prices across different stores, helping you make a cost-effective choice.',
+  }
+};
+
+const t = (ru: string, en: string): LocalizedString => ({ ru, en });
 
 export const SURVEY_STEPS: SurveyStepData[] = [
   {
     id: 'recipient',
-    question: 'Для кого вы ищете подарок? (Who are you looking for a gift for?)',
+    question: t('Для кого вы ищете подарок?', 'Who are you looking for a gift for?'),
     type: OptionType.TEXT,
+    allowOther: true,
     options: [
-      { label: 'Партнер (Partner)', value: 'partner' },
-      { label: 'Член семьи (Family)', value: 'family member' },
-      { label: 'Друг (Friend)', value: 'friend' },
-      { label: 'Коллега (Colleague)', value: 'colleague' },
-      { label: 'Ребенок (Child)', value: 'child' },
-      { label: 'Родитель (Parent)', value: 'parent' },
+      { label: t('Партнер', 'Partner'), value: 'partner' },
+      { label: t('Член семьи', 'Family Member'), value: 'family member' },
+      { label: t('Друг', 'Friend'), value: 'friend' },
+      { label: t('Коллега', 'Colleague'), value: 'colleague' },
+      { label: t('Ребенок', 'Child'), value: 'child' },
+      { label: t('Родитель', 'Parent'), value: 'parent' },
     ],
   },
   {
     id: 'occasion',
-    question: 'По какому поводу подарок? (What\'s the occasion?)',
+    question: t('По какому поводу подарок?', "What's the occasion?"),
     type: OptionType.TEXT,
+    allowOther: true,
     options: [
-        { label: 'День рождения (Birthday)', value: 'birthday' },
-        { label: 'Новый год (New Year)', value: 'new year' },
-        { label: 'Годовщина (Anniversary)', value: 'anniversary' },
-        { label: '8 марта / 23 февраля', value: '8th march or 23rd february' },
-        { label: 'Просто так (Just because)', value: 'just because' },
+        { label: t('День рождения', 'Birthday'), value: 'birthday' },
+        { label: t('Новый год', 'New Year'), value: 'new year' },
+        { label: t('Годовщина', 'Anniversary'), value: 'anniversary' },
+        { label: t("8 марта / 23 февраля", "International Women's / Defender of the Fatherland Day"), value: '8th march or 23rd february' },
+        { label: t('Просто так', 'Just because'), value: 'just because' },
     ]
   },
   {
     id: 'gender',
-    question: 'Какого он/она пола? (What is their gender?)',
+    question: t('Какого он/она пола?', 'What is their gender?'),
     type: OptionType.TEXT,
     options: [
-      { label: 'Мужчина (Male)', value: 'male' },
-      { label: 'Женщина (Female)', value: 'female' },
-      { label: 'Не имеет значения (Doesn\'t matter)', value: 'any' },
+      { label: t('Мужчина', 'Male'), value: 'male' },
+      { label: t('Женщина', 'Female'), value: 'female' },
+      { label: t('Не имеет значения', "Doesn't matter"), value: 'any' },
     ],
   },
   {
     id: 'budget',
-    question: 'Какой у вас бюджет? (What is your budget?)',
+    question: t('Какой у вас бюджет?', 'What is your budget?'),
     type: OptionType.TEXT,
     options: [
-      { label: 'до 3,000₽ (Under 3,000₽)', value: 'under 3000 RUB' },
-      { label: '3,000₽ - 10,000₽', value: '3000-10000 RUB' },
-      { label: '10,000₽ - 25,000₽', value: '10000-25000 RUB' },
-      { label: '25,000₽+ (25,000₽+)', value: 'over 25000 RUB' },
+      { label: t('до 3,000₽', 'Under 3,000₽'), value: 'under 3000 RUB' },
+      { label: t('3,000₽ - 10,000₽', '3,000₽ - 10,000₽'), value: '3000-10000 RUB' },
+      { label: t('10,000₽ - 25,000₽', '10,000₽ - 25,000₽'), value: '10000-25000 RUB' },
+      { label: t('25,000₽+', 'Over 25,000₽'), value: 'over 25000 RUB' },
     ],
   },
    {
     id: 'personality',
-    question: 'Какой он/она человек? (What is their personality like?)',
+    question: t('Какой он/она человек?', 'What is their personality like?'),
     type: OptionType.IMAGE,
     options: [
-        { label: 'Душа компании (Life of the party)', value: 'extrovert, social, life of the party', imageUrl: 'https://picsum.photos/seed/party1/400/300' },
-        { label: 'Домосед (Homebody)', value: 'introvert, homebody, cozy', imageUrl: 'https://picsum.photos/seed/home1/400/300' },
-        { label: 'Интеллектуал (Intellectual)', value: 'intellectual, loves learning, books', imageUrl: 'https://picsum.photos/seed/book1/400/300' },
-        { label: 'Творческая личность (Creative Soul)', value: 'creative, artistic, loves making things', imageUrl: 'https://picsum.photos/seed/creative1/400/300' },
+        { label: t('Душа компании', 'Life of the party'), value: 'extrovert, social, life of the party', imageUrl: 'https://picsum.photos/seed/party1/400/300' },
+        { label: t('Домосед', 'Homebody'), value: 'introvert, homebody, cozy', imageUrl: 'https://picsum.photos/seed/home1/400/300' },
+        { label: t('Интеллектуал', 'Intellectual'), value: 'intellectual, loves learning, books', imageUrl: 'https://picsum.photos/seed/book1/400/300' },
+        { label: t('Творческая личность', 'Creative Soul'), value: 'creative, artistic, loves making things', imageUrl: 'https://picsum.photos/seed/creative1/400/300' },
     ]
   },
   {
     id: 'style',
-    question: 'Какой стиль дома он/она бы предпочел(а)? (Which house style would they prefer?)',
+    question: t('Какой стиль дома он/она бы предпочел(а)?', 'Which house style would they prefer?'),
     type: OptionType.IMAGE,
     options: [
-      { label: 'Современный минимализм (Modern Minimalist)', value: 'modern minimalist', imageUrl: 'https://picsum.photos/seed/house1/400/300' },
-      { label: 'Уютный деревенский (Cozy Rustic)', value: 'cozy rustic', imageUrl: 'https://picsum.photos/seed/house2/400/300' },
-      { label: 'Роскошный классический (Luxury Classic)', value: 'luxury classic', imageUrl: 'https://picsum.photos/seed/house3/400/300' },
-      { label: 'Богемный шик (Bohemian Chic)', value: 'bohemian chic', imageUrl: 'https://picsum.photos/seed/house4/400/300' },
+      { label: t('Современный минимализм', 'Modern Minimalist'), value: 'modern minimalist', imageUrl: 'https://picsum.photos/seed/house1/400/300' },
+      { label: t('Уютный деревенский', 'Cozy Rustic'), value: 'cozy rustic', imageUrl: 'https://picsum.photos/seed/house2/400/300' },
+      { label: t('Роскошный классический', 'Luxury Classic'), value: 'luxury classic', imageUrl: 'https://picsum.photos/seed/house3/400/300' },
+      { label: t('Богемный шик', 'Bohemian Chic'), value: 'bohemian chic', imageUrl: 'https://picsum.photos/seed/house4/400/300' },
     ],
   },
    {
     id: 'activity',
-    question: 'Какое занятие ему/ей больше по душе? (Which activity do they prefer?)',
+    question: t('Какое занятие ему/ей больше по душе?', 'Which activity do they prefer?'),
     type: OptionType.IMAGE,
     options: [
-      { label: 'Спорт и фитнес (Sports & Fitness)', value: 'sports and fitness', imageUrl: 'https://picsum.photos/seed/sport1/400/300' },
-      { label: 'Технологии и гаджеты (Tech & Gadgets)', value: 'tech and gadgets', imageUrl: 'https://picsum.photos/seed/tech1/400/300' },
-      { label: 'Искусство и творчество (Art & Creativity)', value: 'art and creativity', imageUrl: 'https://picsum.photos/seed/art1/400/300' },
-      { label: 'Путешествия и приключения (Travel & Adventure)', value: 'travel and adventure', imageUrl: 'https://picsum.photos/seed/travel1/400/300' },
+      { label: t('Спорт и фитнес', 'Sports & Fitness'), value: 'sports and fitness', imageUrl: 'https://picsum.photos/seed/sport1/400/300' },
+      { label: t('Технологии и гаджеты', 'Tech & Gadgets'), value: 'tech and gadgets', imageUrl: 'https://picsum.photos/seed/tech1/400/300' },
+      { label: t('Искусство и творчество', 'Art & Creativity'), value: 'art and creativity', imageUrl: 'https://picsum.photos/seed/art1/400/300' },
+      { label: t('Путешествия и приключения', 'Travel & Adventure'), value: 'travel and adventure', imageUrl: 'https://picsum.photos/seed/travel1/400/300' },
     ],
   },
   {
     id: 'giftType',
-    question: 'Какой тип подарка вы рассматриваете? (What type of gift are you considering?)',
+    question: t('Какой тип подарка вы рассматриваете?', 'What type of gift are you considering?'),
     type: OptionType.TEXT,
+    allowOther: true,
     options: [
-      { label: 'Физический предмет (Physical Item)', value: 'physical item' },
-      { label: 'Онлайн-подписка (Online Subscription)', value: 'online subscription' },
-      { label: 'Впечатление (Experience)', value: 'an experience' },
-      { label: 'Любой (Any)', value: 'any' },
+      { label: t('Физический предмет', 'Physical Item'), value: 'physical item' },
+      { label: t('Онлайн-подписка', 'Online Subscription'), value: 'online subscription' },
+      { label: t('Впечатление', 'Experience'), value: 'an experience' },
+      { label: t('Любой', 'Any'), value: 'any' },
     ],
   },
   {
     id: 'socialLink',
-    question: 'Необязательно: Вставьте ссылку на соцсеть для лучших рекомендаций (Optional: Paste a social media link for better suggestions)',
+    question: t('Необязательно: Вставьте ссылку на соцсеть для лучших рекомендаций', 'Optional: Paste a social media link for better suggestions'),
     type: OptionType.TEXT,
     options: [], // This will be a text input field
   }

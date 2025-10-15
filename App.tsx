@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback } from 'react';
 import Header from './components/Header';
 import SurveyStep from './components/SurveyStep';
@@ -7,11 +8,13 @@ import GiftOpeningAnimation from './components/GiftOpeningAnimation';
 import FireflyBackground from './components/FireflyBackground';
 import Wishlist from './components/Wishlist';
 import WhyPodariAI from './components/WhyPodariAI';
-import { SURVEY_STEPS } from './constants';
+import LanguageSwitcher from './components/LanguageSwitcher';
+import { SURVEY_STEPS, i18n } from './constants';
 import { getGiftSuggestions } from './services/geminiService';
 import { SurveyAnswers, GiftSuggestion } from './types';
 
 type AppState = 'survey' | 'loading' | 'opening' | 'results' | 'error';
+type Language = 'ru' | 'en';
 
 const App: React.FC = () => {
   const [appState, setAppState] = useState<AppState>('survey');
@@ -21,6 +24,9 @@ const App: React.FC = () => {
   const [giftSuggestions, setGiftSuggestions] = useState<GiftSuggestion[]>([]);
   const [wishlist, setWishlist] = useState<GiftSuggestion[]>([]);
   const [showWishlist, setShowWishlist] = useState(false);
+  const [language, setLanguage] = useState<Language>('ru');
+
+  const t = i18n[language];
 
   const handleReset = () => {
     setAppState('survey');
@@ -31,11 +37,11 @@ const App: React.FC = () => {
     // Not resetting wishlist so user can start a new search and add to the same list
   };
 
-  const fetchGifts = useCallback(async (finalAnswers: SurveyAnswers) => {
+  const fetchGifts = useCallback(async (finalAnswers: SurveyAnswers, lang: Language) => {
     setAppState('loading');
     setError(null);
     try {
-      const suggestions = await getGiftSuggestions(finalAnswers);
+      const suggestions = await getGiftSuggestions(finalAnswers, lang);
       setGiftSuggestions(suggestions);
       setAppState('opening');
     } catch (err) {
@@ -55,7 +61,7 @@ const App: React.FC = () => {
     if (currentStep < SURVEY_STEPS.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      fetchGifts(newAnswers);
+      fetchGifts(newAnswers, language);
     }
   };
   
@@ -82,29 +88,29 @@ const App: React.FC = () => {
       case 'error':
         return (
           <div className="text-center p-8 bg-red-900/50 border border-red-700 rounded-lg">
-            <h2 className="text-2xl font-bold text-red-300">Произошла ошибка (An Error Occurred)</h2>
+            <h2 className="text-2xl font-bold text-red-300">{t.errorTitle}</h2>
             <p className="text-red-400 mt-2">{error}</p>
             <button
               onClick={handleReset}
               className="mt-6 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg transition"
             >
-              Попробовать снова (Try Again)
+              {t.tryAgain}
             </button>
           </div>
         );
       case 'loading':
-        return <LoadingSpinner />;
+        return <LoadingSpinner t={t} />;
       case 'opening':
-        return <GiftOpeningAnimation onAnimationComplete={handleAnimationComplete} />;
+        return <GiftOpeningAnimation onAnimationComplete={handleAnimationComplete} t={t} />;
       case 'results':
-        return <GiftResults suggestions={giftSuggestions} onReset={handleReset} onAddToWishlist={handleAddToWishlist} wishlist={wishlist} />;
+        return <GiftResults suggestions={giftSuggestions} onReset={handleReset} onAddToWishlist={handleAddToWishlist} wishlist={wishlist} t={t} />;
       case 'survey':
       default:
         const stepData = SURVEY_STEPS[currentStep];
         return (
           <>
-            <SurveyStep stepData={stepData} onNext={handleNextStep} />
-            {currentStep === 0 && <WhyPodariAI />}
+            <SurveyStep stepData={stepData} onNext={handleNextStep} language={language} t={t} />
+            {currentStep === 0 && <WhyPodariAI t={t} />}
           </>
         );
     }
@@ -118,6 +124,7 @@ const App: React.FC = () => {
   return (
     <>
       <FireflyBackground />
+      <LanguageSwitcher language={language} setLanguage={setLanguage} />
        {/* Wishlist Button */}
       {(appState === 'results' || wishlist.length > 0) && (
         <button
@@ -136,12 +143,12 @@ const App: React.FC = () => {
 
       {/* Wishlist Modal */}
       {showWishlist && (
-        <Wishlist items={wishlist} onRemove={handleRemoveFromWishlist} onClose={() => setShowWishlist(false)} />
+        <Wishlist items={wishlist} onRemove={handleRemoveFromWishlist} onClose={() => setShowWishlist(false)} t={t} />
       )}
 
       <div className="min-h-screen flex flex-col items-center p-4 sm:p-6">
         <div className={`w-full mx-auto transition-all duration-500 ${isResultsView ? 'max-w-6xl' : 'max-w-4xl'}`}>
-          <Header />
+          <Header t={t} />
           <main className="mt-8">
             {isSurveyInProgress && (
               <div className="w-full bg-slate-800 rounded-full h-2.5 mb-8 shadow-inner">

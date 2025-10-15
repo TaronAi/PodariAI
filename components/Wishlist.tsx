@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { GiftSuggestion } from '../types';
 
@@ -5,9 +6,16 @@ interface WishlistProps {
   items: GiftSuggestion[];
   onRemove: (giftName: string) => void;
   onClose: () => void;
+  t: {
+    wishlistTitle: string;
+    closeWishlist: string;
+    wishlistEmpty: string;
+    wishlistEmptyHint: string;
+    remove: string;
+  }
 }
 
-const Wishlist: React.FC<WishlistProps> = ({ items, onRemove, onClose }) => {
+const Wishlist: React.FC<WishlistProps> = ({ items, onRemove, onClose, t }) => {
   // Prevent scrolling on the body when the modal is open
   React.useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -30,9 +38,9 @@ const Wishlist: React.FC<WishlistProps> = ({ items, onRemove, onClose }) => {
         <header className="flex justify-between items-center p-4 border-b border-slate-700 flex-shrink-0">
           <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
             <i className="fas fa-heart mr-2"></i>
-            Ваш вишлист (Your Wishlist)
+            {t.wishlistTitle}
           </h2>
-          <button onClick={onClose} className="text-slate-400 hover:text-white" aria-label="Close wishlist">
+          <button onClick={onClose} className="text-slate-400 hover:text-white" aria-label={t.closeWishlist}>
             <i className="fas fa-times text-2xl"></i>
           </button>
         </header>
@@ -40,8 +48,8 @@ const Wishlist: React.FC<WishlistProps> = ({ items, onRemove, onClose }) => {
         <div className="overflow-y-auto p-6">
           {items.length === 0 ? (
             <div className="text-center py-10">
-              <p className="text-slate-400">Ваш вишлист пуст. (Your wishlist is empty.)</p>
-              <p className="text-sm text-slate-500 mt-2">Нажмите на сердечко на карточке подарка, чтобы добавить его сюда. (Click the heart on a gift card to add it here.)</p>
+              <p className="text-slate-400">{t.wishlistEmpty}</p>
+              <p className="text-sm text-slate-500 mt-2">{t.wishlistEmptyHint}</p>
             </div>
           ) : (
             <ul className="space-y-4">
@@ -59,7 +67,7 @@ const Wishlist: React.FC<WishlistProps> = ({ items, onRemove, onClose }) => {
                   <button 
                     onClick={() => onRemove(item.name)} 
                     className="w-10 h-10 flex-shrink-0 bg-red-600 text-white rounded-full flex items-center justify-center hover:bg-red-700 transition-transform transform hover:scale-110"
-                    aria-label={`Remove ${item.name} from wishlist`}
+                    aria-label={`${t.remove} ${item.name}`}
                   >
                     <i className="fas fa-trash"></i>
                   </button>

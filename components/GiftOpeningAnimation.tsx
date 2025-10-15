@@ -1,10 +1,14 @@
+
 import React, { useEffect } from 'react';
 
 interface GiftOpeningAnimationProps {
   onAnimationComplete: () => void;
+  t: {
+    openingPresent: string;
+  }
 }
 
-const GiftOpeningAnimation: React.FC<GiftOpeningAnimationProps> = ({ onAnimationComplete }) => {
+const GiftOpeningAnimation: React.FC<GiftOpeningAnimationProps> = ({ onAnimationComplete, t }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       onAnimationComplete();
@@ -19,7 +23,7 @@ const GiftOpeningAnimation: React.FC<GiftOpeningAnimationProps> = ({ onAnimation
             <div className="gift-lid"></div>
             <div className="gift-box"></div>
         </div>
-        <p className="mt-8 text-2xl font-semibold text-white">Открываем ваш подарок... (Opening your present...)</p>
+        <p className="mt-8 text-2xl font-semibold text-white">{t.openingPresent}</p>
     </div>
   );
 };

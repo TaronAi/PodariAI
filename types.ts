@@ -1,4 +1,9 @@
 
+export interface LocalizedString {
+  ru: string;
+  en: string;
+}
+
 export interface SurveyAnswers {
   recipient?: string;
   occasion?: string;
@@ -28,14 +33,15 @@ export enum OptionType {
 }
 
 export interface SurveyOption {
-  label: string;
+  label: LocalizedString;
   value: string;
   imageUrl?: string;
 }
 
 export interface SurveyStepData {
   id: keyof SurveyAnswers;
-  question: string;
+  question: LocalizedString;
   options: SurveyOption[];
   type: OptionType;
+  allowOther?: boolean;
 }

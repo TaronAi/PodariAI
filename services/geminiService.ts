@@ -4,9 +4,11 @@ import { SurveyAnswers, GiftSuggestion } from '../types';
 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
 
-export const getGiftSuggestions = async (answers: SurveyAnswers): Promise<GiftSuggestion[]> => {
+export const getGiftSuggestions = async (answers: SurveyAnswers, language: 'ru' | 'en'): Promise<GiftSuggestion[]> => {
   const prompt = `
-    You are an expert gift-giving assistant for the Russian market. Based on the following user preferences, generate 6 creative and thoughtful gift ideas.
+    You are an expert gift-giving assistant. Your response must be exclusively in the ${language === 'ru' ? 'Russian' : 'English'} language.
+    The gift suggestions should be tailored for the Russian market.
+    Based on the following user preferences, generate 6 creative and thoughtful gift ideas.
     
     Preferences:
     - Gift for: ${answers.recipient}
@@ -26,7 +28,7 @@ export const getGiftSuggestions = async (answers: SurveyAnswers): Promise<GiftSu
     4. A fictional but realistic-looking affiliate link for Ozon.
     5. A fictional but realistic-looking affiliate link for Wildberries.
     6. A fictional but realistic-looking affiliate link for Yandex Market.
-    7. A suggestion for a local store type or a specific subscription service.
+    7. A suggestion for a local store type or a specific subscription service (e.g., "Available in electronics stores like M.Video" or "Consider a subscription to 'Amediateka'").
     8. A descriptive prompt for an image generation model to create a visually appealing, photorealistic image of the gift (e.g., "A sleek black smartwatch on a wooden desk next to a laptop").
 
     Return the result as a JSON array of objects.

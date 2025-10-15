@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { GiftSuggestion } from '../types';
 
@@ -6,13 +7,20 @@ interface GiftResultsProps {
   onReset: () => void;
   onAddToWishlist: (gift: GiftSuggestion) => void;
   wishlist: GiftSuggestion[];
+  t: {
+    resultsTitle: string;
+    whereToBuy: string;
+    startOver: string;
+    addToWishlist: string;
+    removeFromWishlist: string;
+  }
 }
 
-const GiftResults: React.FC<GiftResultsProps> = ({ suggestions, onReset, onAddToWishlist, wishlist }) => {
+const GiftResults: React.FC<GiftResultsProps> = ({ suggestions, onReset, onAddToWishlist, wishlist, t }) => {
   return (
     <div className="w-full max-w-6xl mx-auto px-4">
       <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 animate-fade-in">
-        Вот что мы подобрали для вас! (Here are your gift ideas!)
+        {t.resultsTitle}
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {suggestions.map((gift, index) => {
@@ -36,7 +44,7 @@ const GiftResults: React.FC<GiftResultsProps> = ({ suggestions, onReset, onAddTo
                     className={`absolute top-4 right-4 z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 transform group-hover:opacity-100 ${
                       isInWishlist ? 'bg-white/90 text-red-500' : 'opacity-70 bg-black/50 text-white hover:bg-white/80 hover:text-red-500'
                     }`}
-                    aria-label={isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
+                    aria-label={isInWishlist ? t.removeFromWishlist : t.addToWishlist}
                   >
                     <i className={`fa-heart text-lg ${isInWishlist ? 'fas' : 'far'}`}></i>
                 </button>
@@ -45,7 +53,7 @@ const GiftResults: React.FC<GiftResultsProps> = ({ suggestions, onReset, onAddTo
                 <p className="text-slate-300 text-sm flex-grow mb-4">{gift.description}</p>
                 <p className="text-2xl font-semibold text-white mt-auto mb-4">{gift.price}</p>
                 <div className="border-t border-slate-700 pt-4">
-                  <p className="text-sm font-semibold text-slate-400 mb-3">Где купить (Where to buy):</p>
+                  <p className="text-sm font-semibold text-slate-400 mb-3">{t.whereToBuy}:</p>
                   <div className="flex flex-col space-y-2 text-sm">
                     <a href={gift.ozonLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
                       <i className="fas fa-shopping-cart mr-2"></i>Ozon
@@ -72,7 +80,7 @@ const GiftResults: React.FC<GiftResultsProps> = ({ suggestions, onReset, onAddTo
           onClick={onReset}
           className="bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-8 rounded-lg transition-transform transform hover:scale-105"
         >
-          Начать заново (Start Over)
+          {t.startOver}
         </button>
       </div>
     </div>
