@@ -58,6 +58,8 @@ export const i18n: any = {
     settingsSubtitle: 'Настройте ваш опыт',
     settingsRegion: 'Регион',
     settingsLanguage: 'Язык',
+    settingsFlameAnimation: 'Анимация пламени',
+    settingsFlameDescription: 'Включить эффект пламени для курсора',
     footerHome: 'Главная',
     footerAbout: 'О нас',
     footerCopyright: `© ${new Date().getFullYear()} Podari.AI. Все права защищены.`,
@@ -126,6 +128,8 @@ export const i18n: any = {
     settingsSubtitle: 'Customize your experience',
     settingsRegion: 'Region',
     settingsLanguage: 'Language',
+    settingsFlameAnimation: 'Flame Animation',
+    settingsFlameDescription: 'Enable cursor flame effect',
     footerHome: 'Home',
     footerAbout: 'About Us',
     footerCopyright: `© ${new Date().getFullYear()} Podari.AI. All Rights Reserved.`,
@@ -207,49 +211,4 @@ export const SURVEY_STEPS: SurveyStepData[] = [
     type: OptionType.IMAGE,
     options: [
         { label: t('Душа компании', 'Life of the party'), value: 'extrovert, social, life of the party', imageUrl: 'https://picsum.photos/seed/party1/400/300' },
-        { label: t('Домосед', 'Homebody'), value: 'introvert, homebody, cozy', imageUrl: 'https://picsum.photos/seed/home1/400/300' },
-        { label: t('Интеллектуал', 'Intellectual'), value: 'intellectual, loves learning, books', imageUrl: 'https://picsum.photos/seed/book1/400/300' },
-        { label: t('Творческая личность', 'Creative Soul'), value: 'creative, artistic, loves making things', imageUrl: 'https://picsum.photos/seed/creative1/400/300' },
-    ]
-  },
-  {
-    id: 'style',
-    question: t('Какой стиль дома он/она бы предпочел(а)?', 'Which house style would they prefer?'),
-    type: OptionType.IMAGE,
-    options: [
-      { label: t('Современный минимализм', 'Modern Minimalist'), value: 'modern minimalist', imageUrl: 'https://picsum.photos/seed/house1/400/300' },
-      { label: t('Уютный деревенский', 'Cozy Rustic'), value: 'cozy rustic', imageUrl: 'https://picsum.photos/seed/house2/400/300' },
-      { label: t('Роскошный классический', 'Luxury Classic'), value: 'luxury classic', imageUrl: 'https://picsum.photos/seed/house3/400/300' },
-      { label: t('Богемный шик', 'Bohemian Chic'), value: 'bohemian chic', imageUrl: 'https://picsum.photos/seed/house4/400/300' },
-    ],
-  },
-   {
-    id: 'activity',
-    question: t('Какое занятие ему/ей больше по душе?', 'Which activity do they prefer?'),
-    type: OptionType.IMAGE,
-    options: [
-      { label: t('Спорт и фитнес', 'Sports & Fitness'), value: 'sports and fitness', imageUrl: 'https://picsum.photos/seed/sport1/400/300' },
-      { label: t('Технологии и гаджеты', 'Tech & Gadgets'), value: 'tech and gadgets', imageUrl: 'https://picsum.photos/seed/tech1/400/300' },
-      { label: t('Искусство и творчество', 'Art & Creativity'), value: 'art and creativity', imageUrl: 'https://picsum.photos/seed/art1/400/300' },
-      { label: t('Путешествия и приключения', 'Travel & Adventure'), value: 'travel and adventure', imageUrl: 'https://picsum.photos/seed/travel1/400/300' },
-    ],
-  },
-  {
-    id: 'giftType',
-    question: t('Какой тип подарка вы рассматриваете?', 'What type of gift are you considering?'),
-    type: OptionType.TEXT,
-    allowOther: true,
-    options: [
-      { label: t('Физический предмет', 'Physical Item'), value: 'physical item' },
-      { label: t('Онлайн-подписка', 'Online Subscription'), value: 'online subscription' },
-      { label: t('Впечатление', 'Experience'), value: 'an experience' },
-      { label: t('Любой', 'Any'), value: 'any' },
-    ],
-  },
-  {
-    id: 'socialLink',
-    question: t('Необязательно: Вставьте ссылку на соцсеть для лучших рекомендаций', 'Optional: Paste a social media link for better suggestions'),
-    type: OptionType.TEXT,
-    options: [], // This will be a text input field
-  }
-];
+        { label: t('Домосед', 'Homebody'), value: 'introvert, homebody, cozy', imageUrl: 'https://picsum.photos/seed/home1
