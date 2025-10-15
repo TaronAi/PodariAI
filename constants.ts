@@ -211,4 +211,55 @@ export const SURVEY_STEPS: SurveyStepData[] = [
     type: OptionType.IMAGE,
     options: [
         { label: t('Душа компании', 'Life of the party'), value: 'extrovert, social, life of the party', imageUrl: 'https://picsum.photos/seed/party1/400/300' },
-        { label: t('Домосед', 'Homebody'), value: 'introvert, homebody, cozy', imageUrl: 'https://picsum.photos/seed/home1
+        { label: t('Домосед', 'Homebody'), value: 'introvert, homebody, cozy', imageUrl: 'https://picsum.photos/seed/home1/400/300' },
+        { label: t('Творческая личность', 'Creative Soul'), value: 'creative, artistic, unique', imageUrl: 'https://picsum.photos/seed/art1/400/300' },
+        { label: t('Спортсмен', 'Athlete'), value: 'active, sporty, outdoorsy', imageUrl: 'https://picsum.photos/seed/sport1/400/300' },
+        { label: t('Интеллектуал', 'Intellectual'), value: 'intellectual, curious, loves to learn', imageUrl: 'https://picsum.photos/seed/book1/400/300' },
+        { label: t('Прагматик', 'Pragmatist'), value: 'pragmatic, organized, minimalist', imageUrl: 'https://picsum.photos/seed/minimal1/400/300' },
+    ],
+  },
+  {
+    id: 'style',
+    question: t('Выберите дом, который ему/ей больше всего понравится', 'Choose the house they would love the most'),
+    type: OptionType.IMAGE,
+    options: [
+        { label: t('Современный минимализм', 'Modern Minimalist'), value: 'modern, minimalist, clean lines', imageUrl: 'https://picsum.photos/seed/modernhouse/400/300' },
+        { label: t('Уютный загородный дом', 'Cozy Countryside'), value: 'cozy, rustic, countryside', imageUrl: 'https://picsum.photos/seed/cottage/400/300' },
+        { label: t('Богемный', 'Bohemian'), value: 'bohemian, eclectic, artistic', imageUrl: 'https://picsum.photos/seed/bohohouse/400/300' },
+        { label: t('Классическая элегантность', 'Classic Elegance'), value: 'classic, elegant, traditional', imageUrl: 'https://picsum.photos/seed/classichouse/400/300' },
+    ]
+  },
+  {
+    id: 'activity',
+    question: t('Как он/она предпочитает проводить свободное время?', 'How do they like to spend their free time?'),
+    type: OptionType.IMAGE,
+    options: [
+        { label: t('Путешествия и приключения', 'Traveling & Adventure'), value: 'travel, adventure, hiking', imageUrl: 'https://picsum.photos/seed/travel/400/300' },
+        { label: t('Вечер с книгой или фильмом', 'A night with a book or movie'), value: 'reading, movies, relaxing at home', imageUrl: 'https://picsum.photos/seed/reading/400/300' },
+        { label: t('Готовка и кулинария', 'Cooking & Gastronomy'), value: 'cooking, food, gastronomy', imageUrl: 'https://picsum.photos/seed/cooking/400/300' },
+        { label: t('Технологии и гаджеты', 'Tech & Gadgets'), value: 'technology, gadgets, gaming', imageUrl: 'https://picsum.photos/seed/tech/400/300' },
+        { label: t('Занятия спортом', 'Playing Sports'), value: 'sports, fitness, gym', imageUrl: 'https://picsum.photos/seed/fitness/400/300' },
+        { label: t('Творчество и хобби', 'Arts & Crafts'), value: 'crafts, painting, music', imageUrl: 'https://picsum.photos/seed/crafts/400/300' },
+    ]
+  },
+  {
+    id: 'giftType',
+    question: t('Какой тип подарка вы предпочитаете?', 'What type of gift are you looking for?'),
+    type: OptionType.TEXT,
+    allowOther: true,
+    options: [
+      { label: t('Техника и гаджеты', 'Tech & Gadgets'), value: 'tech and gadgets' },
+      { label: t('Одежда и аксессуары', 'Fashion & Accessories'), value: 'fashion and accessories' },
+      { label: t('Книги и хобби', 'Books & Hobbies'), value: 'books and hobbies' },
+      { label: t('Для дома и уюта', 'Home & Cozy'), value: 'home and decor' },
+      { label: t('Впечатления', 'Experiences'), value: 'experiences (e.g., tickets, trips)' },
+      { label: t('Еда и напитки', 'Food & Drink'), value: 'gourmet food and drink' },
+    ]
+  },
+  {
+    id: 'socialLink',
+    question: t('Хотите, чтобы ИИ проанализировал его/ее соцсети для более точных рекомендаций? (опционально)', 'Want the AI to analyze their social media for better recommendations? (optional)'),
+    type: OptionType.TEXT, // This is a special input field handled in SurveyStep.tsx
+    options: [],
+  },
+];
