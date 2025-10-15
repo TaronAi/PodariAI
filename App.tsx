@@ -6,7 +6,6 @@ import AboutPage from './pages/AboutPage';
 import WishlistPage from './pages/WishlistPage';
 import SettingsPage from './pages/SettingsPage';
 import Footer from './components/Footer';
-import FireflyBackground from './components/FireflyBackground';
 import FloatingWishlistButton from './components/FloatingWishlistButton';
 import { i18n } from './constants';
 import { GiftSuggestion, RegionCode, Language } from './types';
@@ -70,25 +69,22 @@ const App: React.FC = () => {
   };
 
   return (
-    <>
-      <FireflyBackground />
-      <div className="min-h-screen flex flex-col">
-        <Navbar
-          setCurrentPage={setCurrentPage}
-          currentPage={currentPage}
-          t={t}
-        />
-        <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {renderContent()}
-        </main>
-        <FloatingWishlistButton
-          wishlistCount={wishlist.length}
-          onClick={() => setCurrentPage('wishlist')}
-          t={t}
-        />
-        <Footer setCurrentPage={setCurrentPage} t={t} />
-      </div>
-    </>
+    <div className="min-h-screen flex flex-col">
+      <Navbar
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
+        t={t}
+      />
+      <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {renderContent()}
+      </main>
+      <FloatingWishlistButton
+        wishlistCount={wishlist.length}
+        onClick={() => setCurrentPage('wishlist')}
+        t={t}
+      />
+      <Footer setCurrentPage={setCurrentPage} t={t} />
+    </div>
   );
 };
 

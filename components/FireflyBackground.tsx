@@ -1,22 +1,19 @@
 import React, { useRef, useEffect } from 'react';
 
-interface Particle {
+interface FlameParticle {
   x: number;
   y: number;
-  size: number;
+  radius: number;
   speedX: number;
   speedY: number;
   life: number;
   maxLife: number;
 }
 
-const PARTICLE_LIFESPAN = 70; // In frames, a bit over 1 second
-const GRAVITY = 0.07;
-
 const FireflyBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameId = useRef<number | undefined>(undefined);
-  const particles = useRef<Particle[]>([]);
+  const particles = useRef<FlameParticle[]>([]);
   const lastMousePosition = useRef<{ x: number | null; y: number | null }>({ x: null, y: null });
   const mouseMoveTimeout = useRef<number | undefined>(undefined);
 
@@ -36,16 +33,16 @@ const FireflyBackground: React.FC = () => {
     };
 
     const createParticles = (x: number, y: number) => {
-      const particleCount = 5; // A cluster of particles for a wider trail
+      const particleCount = 5; // More particles for a smoother trail
       for (let i = 0; i < particleCount; i++) {
-        const size = Math.random() * 5 + 3; // larger size for a fuller effect
-        const life = Math.random() * PARTICLE_LIFESPAN + PARTICLE_LIFESPAN * 0.5; // longer, more varied lifespan
+        const radius = Math.random() * 18 + 12; 
+        const life = Math.random() * 40 + 30; // Longer lifespan
         particles.current.push({
-          x,
-          y,
-          size,
-          speedX: Math.random() * 4 - 2, // horizontal spread
-          speedY: Math.random() * 3 - 2, // initial vertical push
+          x: x + (Math.random() - 0.5) * 15,
+          y: y + (Math.random() - 0.5) * 15,
+          radius,
+          speedX: Math.random() * 2 - 1, 
+          speedY: Math.random() * 0.5 + 0.2, // Slower upward movement
           life,
           maxLife: life,
         });
@@ -58,7 +55,7 @@ const FireflyBackground: React.FC = () => {
         window.clearTimeout(mouseMoveTimeout.current);
       }
       mouseMoveTimeout.current = window.setTimeout(() => {
-        lastMousePosition.current = { x: null, y: null }; // Stop emitting when mouse is idle
+        lastMousePosition.current = { x: null, y: null };
       }, 100);
     };
 
@@ -71,32 +68,32 @@ const FireflyBackground: React.FC = () => {
       }
 
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      
+      ctx.globalCompositeOperation = 'lighter';
 
       for (let i = particles.current.length - 1; i >= 0; i--) {
         const p = particles.current[i];
         p.life--;
 
-        if (p.life <= 0 || p.size <= 0.2) {
+        if (p.life <= 0 || p.radius <= 0.2) {
           particles.current.splice(i, 1);
           continue;
         }
 
         p.x += p.speedX;
-        p.y += p.speedY;
-        p.speedY += GRAVITY; // gentle gravity for a falling ember effect
-        p.size *= 0.97; // Particles shrink to fade out
+        p.y -= p.speedY; // Move upwards slowly
+        p.radius *= 0.98; // Shrink slower for a longer tail
 
-        const opacity = p.life / p.maxLife;
-        const hue = 20 + 30 * (p.life / p.maxLife); // Color shifts from bright yellow-orange to deep red
-
+        const opacity = (p.life / p.maxLife) * 0.8;
+        
         ctx.beginPath();
-        const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size);
-        gradient.addColorStop(0, `hsla(${hue}, 100%, 70%, ${opacity})`);
-        gradient.addColorStop(0.4, `hsla(${hue - 10}, 100%, 55%, ${opacity * 0.8})`);
-        gradient.addColorStop(1, `hsla(${hue - 20}, 90%, 40%, 0)`);
+        const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
+        gradient.addColorStop(0, `rgba(255, 255, 180, ${opacity})`);      // Hot center (bright yellow-white)
+        gradient.addColorStop(0.4, `rgba(255, 160, 0, ${opacity * 0.7})`); // Middle (soft orange)
+        gradient.addColorStop(1, `rgba(255, 60, 0, 0)`);                   // Edge (deep transparent red)
         
         ctx.fillStyle = gradient;
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fill();
       }
     };

@@ -15,7 +15,13 @@ interface SettingsPageProps {
   }
 }
 
-const SettingsPage: React.FC<SettingsPageProps> = ({ region, setRegion, language, setLanguage, t }) => {
+const SettingsPage: React.FC<SettingsPageProps> = ({ 
+  region, 
+  setRegion, 
+  language, 
+  setLanguage, 
+  t 
+}) => {
 
   const handleRegionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newRegionCode = e.target.value as RegionCode;
@@ -38,7 +44,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ region, setRegion, language
         <p className="text-slate-400 mt-2">{t.settingsSubtitle}</p>
       </header>
 
-      <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-6 sm:p-8 space-y-6">
+      <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-6 sm:p-8 space-y-8">
         <div>
           <label htmlFor="region-select" className="block text-lg font-semibold text-slate-300 mb-2">
             {t.settingsRegion}
@@ -69,6 +75,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ region, setRegion, language
             <option value="en">English</option>
           </select>
         </div>
+        
       </div>
 
     </div>
