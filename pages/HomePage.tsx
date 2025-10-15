@@ -98,20 +98,9 @@ const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language
     }
   };
 
-  const isSurveyInProgress = appState === 'survey';
-  const progressPercentage = isSurveyInProgress ? (currentStep / SURVEY_STEPS.length) * 100 : 100;
-
   return (
     <div className={`w-full mx-auto transition-all duration-500 ${appState === 'results' ? 'max-w-6xl' : 'max-w-4xl'}`}>
        <div className="mt-4 sm:mt-8">
-            {isSurveyInProgress && (
-              <div className="w-full bg-slate-800 rounded-full h-2.5 mb-6 sm:mb-8 shadow-inner">
-                <div
-                  className="bg-gradient-to-r from-purple-500 to-pink-500 h-2.5 rounded-full transition-all duration-500"
-                  style={{ width: `${progressPercentage}%` }}
-                ></div>
-              </div>
-            )}
             {renderMainContent()}
           </div>
     </div>
