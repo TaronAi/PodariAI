@@ -45,3 +45,12 @@ export interface SurveyStepData {
   type: OptionType;
   allowOther?: boolean;
 }
+
+// Updated Types for Settings
+export type RegionCode = 'RU' | 'AM' | 'BY' | 'GE' | 'KZ' | 'KG' | 'TJ' | 'UZ';
+export type Language = 'ru' | 'en';
+
+export interface Region {
+  code: RegionCode;
+  name: string;
+}

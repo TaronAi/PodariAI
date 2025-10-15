@@ -1,10 +1,13 @@
+
 import React, { useState, useEffect } from 'react';
-import { SurveyStepData, OptionType, SurveyAnswers } from '../types';
+// Fix: Import `Language` type to correctly type the component props.
+import { SurveyStepData, OptionType, SurveyAnswers, Language } from '../types';
 
 interface SurveyStepProps {
   stepData: SurveyStepData;
   onNext: (answer: { id: keyof SurveyAnswers; value: string }) => void;
-  language: 'ru' | 'en';
+  // Fix: Widened the language prop type to `Language` to accept all supported languages.
+  language: Language;
   t: {
     other: string;
     submit: string;
@@ -18,6 +21,9 @@ const SurveyStep: React.FC<SurveyStepProps> = ({ stepData, onNext, language, t }
   const [socialLink, setSocialLink] = useState('');
   const [isOtherInputVisible, setOtherInputVisible] = useState(false);
   const [otherValue, setOtherValue] = useState('');
+
+  // Fix: Added a language key with a fallback to 'en'. The `LocalizedString` type only has 'ru' and 'en' keys. This ensures that for any language other than Russian, the English text is used.
+  const langKey = language === 'ru' ? 'ru' : 'en';
 
   // Reset local state when the survey step (question) changes
   useEffect(() => {
@@ -47,7 +53,7 @@ const SurveyStep: React.FC<SurveyStepProps> = ({ stepData, onNext, language, t }
   if (stepData.id === 'socialLink') {
     return (
         <div className="flex flex-col items-center animate-fade-in">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-6 text-center">{stepData.question[language]}</h2>
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-6 text-center">{stepData.question[langKey]}</h2>
             <form onSubmit={(e) => {
                 e.preventDefault();
                 onNext({ id: stepData.id, value: socialLink || 'not provided' });
@@ -79,7 +85,7 @@ const SurveyStep: React.FC<SurveyStepProps> = ({ stepData, onNext, language, t }
 
   return (
     <div className="flex flex-col items-center animate-fade-in">
-      <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-8 text-center">{stepData.question[language]}</h2>
+      <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-8 text-center">{stepData.question[langKey]}</h2>
       
       <div
         className={
@@ -101,12 +107,12 @@ const SurveyStep: React.FC<SurveyStepProps> = ({ stepData, onNext, language, t }
           >
             {stepData.type === OptionType.IMAGE && option.imageUrl && (
               <>
-                <img src={option.imageUrl} alt={option.label[language]} className="w-full h-48 object-cover" />
+                <img src={option.imageUrl} alt={option.label[langKey]} className="w-full h-48 object-cover" />
                 <div className="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-30 transition-all duration-300"></div>
-                <span className="absolute bottom-4 left-4 text-white text-lg font-bold">{option.label[language]}</span>
+                <span className="absolute bottom-4 left-4 text-white text-lg font-bold">{option.label[langKey]}</span>
               </>
             )}
-            {stepData.type === OptionType.TEXT && <span>{option.label[language]}</span>}
+            {stepData.type === OptionType.TEXT && <span>{option.label[langKey]}</span>}
           </button>
         ))}
 

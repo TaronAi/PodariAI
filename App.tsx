@@ -1,24 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import TrendingPage from './pages/TrendingPage';
 import AboutPage from './pages/AboutPage';
 import WishlistPage from './pages/WishlistPage';
+import SettingsPage from './pages/SettingsPage';
 import Footer from './components/Footer';
 import FireflyBackground from './components/FireflyBackground';
 import FloatingWishlistButton from './components/FloatingWishlistButton';
 import { i18n } from './constants';
-import { GiftSuggestion } from './types';
+import { GiftSuggestion, RegionCode, Language } from './types';
 
-export type Page = 'home' | 'trending' | 'about' | 'wishlist';
-export type Language = 'ru' | 'en';
+export type Page = 'home' | 'trending' | 'about' | 'wishlist' | 'settings';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
   const [wishlist, setWishlist] = useState<GiftSuggestion[]>([]);
+  
+  const [region, setRegion] = useState<RegionCode>('RU');
   const [language, setLanguage] = useState<Language>('ru');
 
-  const t = i18n[language];
+  const t = i18n[language] || i18n['en'];
+
+  useEffect(() => {
+    document.title = t.documentTitle;
+  }, [t.documentTitle]);
 
   const handleAddToWishlist = (gift: GiftSuggestion) => {
     setWishlist((prevWishlist) => {
@@ -41,6 +47,14 @@ const App: React.FC = () => {
         return <AboutPage t={t} />;
       case 'wishlist':
         return <WishlistPage items={wishlist} onRemove={handleRemoveFromWishlist} t={t} />;
+      case 'settings':
+        return <SettingsPage 
+                  region={region} 
+                  setRegion={setRegion} 
+                  language={language}
+                  setLanguage={setLanguage}
+                  t={t}
+                />;
       case 'home':
       default:
         return (
@@ -48,6 +62,7 @@ const App: React.FC = () => {
             wishlist={wishlist}
             onAddToWishlist={handleAddToWishlist}
             language={language}
+            region={region}
             t={t}
           />
         );
@@ -59,11 +74,9 @@ const App: React.FC = () => {
       <FireflyBackground />
       <div className="min-h-screen flex flex-col">
         <Navbar
-          t={t}
-          language={language}
-          setLanguage={setLanguage}
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}
+          t={t}
         />
         <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {renderContent()}
@@ -71,8 +84,9 @@ const App: React.FC = () => {
         <FloatingWishlistButton
           wishlistCount={wishlist.length}
           onClick={() => setCurrentPage('wishlist')}
+          t={t}
         />
-        <Footer setCurrentPage={setCurrentPage} />
+        <Footer setCurrentPage={setCurrentPage} t={t} />
       </div>
     </>
   );

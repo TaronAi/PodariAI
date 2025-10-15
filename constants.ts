@@ -1,7 +1,6 @@
+import { SurveyStepData, OptionType, LocalizedString, Region } from './types';
 
-import { SurveyStepData, OptionType, LocalizedString } from './types';
-
-export const i18n = {
+export const i18n: any = {
   ru: {
     // Header
     headerSubtitle: 'Ваш ИИ-помощник в выборе идеального подарка',
@@ -50,6 +49,25 @@ export const i18n = {
     why5Desc: 'От физических товаров до подписок, впечатлений и нишевых подарков.',
     why6Title: 'Прозрачность цен',
     why6Desc: 'Показываем цены в разных магазинах, помогая вам сделать выгодный выбор.',
+    // New Translations
+    navHome: 'Главная',
+    navTrending: 'В тренде',
+    navAbout: 'О нас',
+    navSettings: 'Настройки',
+    settingsTitle: 'Настройки',
+    settingsSubtitle: 'Настройте ваш опыт',
+    settingsRegion: 'Регион',
+    settingsLanguage: 'Язык',
+    footerHome: 'Главная',
+    footerAbout: 'О нас',
+    footerCopyright: `© ${new Date().getFullYear()} Podari.AI. Все права защищены.`,
+    wishlistAria: 'Открыть вишлист',
+    trendingTitle: 'Популярные подарки',
+    aboutTitle: 'О Podari.AI',
+    aboutParagraph1: 'Мы верим, что идеальный подарок — это не просто вещь, а продуманное проявление связи. В мире бесконечных вариантов найти тот самый подарок может быть непросто. Поэтому мы создали Podari.AI.',
+    aboutMissionTitle: 'Наша миссия',
+    aboutMissionParagraph: 'Наша миссия проста: сделать процесс дарения подарков радостным и легким. Мы используем мощь продвинутого искусственного интеллекта, чтобы понять уникальную личность и интересы человека, для которого вы ищете подарок. Вместо общих рекомендаций мы предлагаем персонализированные, креативные и продуманные предложения, которые действительно находят отклик.',
+    documentTitle: 'Podari Ai - Поиск подарков',
   },
   en: {
     // Header
@@ -99,10 +117,40 @@ export const i18n = {
     why5Desc: 'From physical goods to subscriptions, experiences, and niche gifts.',
     why6Title: 'Price Transparency',
     why6Desc: 'We show prices across different stores, helping you make a cost-effective choice.',
+    // New Translations
+    navHome: 'Home',
+    navTrending: 'Trending Gifts',
+    navAbout: 'About Us',
+    navSettings: 'Settings',
+    settingsTitle: 'Settings',
+    settingsSubtitle: 'Customize your experience',
+    settingsRegion: 'Region',
+    settingsLanguage: 'Language',
+    footerHome: 'Home',
+    footerAbout: 'About Us',
+    footerCopyright: `© ${new Date().getFullYear()} Podari.AI. All Rights Reserved.`,
+    wishlistAria: 'Open wishlist',
+    trendingTitle: 'Trending Gifts',
+    aboutTitle: 'About Podari.AI',
+    aboutParagraph1: "We believe that the perfect gift is more than just an item—it's a thoughtful expression of connection. In a world of endless options, finding that perfect gift can be overwhelming. That's why we created Podari.AI.",
+    aboutMissionTitle: 'Our Mission',
+    aboutMissionParagraph: "Our mission is simple: to make gift-giving joyful and effortless. We leverage the power of advanced artificial intelligence to understand the unique personality and interests of the person you're shopping for. Instead of generic recommendations, we provide personalized, creative, and thoughtful suggestions that truly resonate.",
+    documentTitle: 'Podari Ai - Gift Finder',
   }
 };
 
 const t = (ru: string, en: string): LocalizedString => ({ ru, en });
+
+export const REGIONS: Region[] = [
+  { code: 'RU', name: 'Russia' },
+  { code: 'AM', name: 'Armenia' },
+  { code: 'BY', name: 'Belarus' },
+  { code: 'GE', name: 'Georgia' },
+  { code: 'KZ', name: 'Kazakhstan' },
+  { code: 'KG', name: 'Kyrgyzstan' },
+  { code: 'TJ', name: 'Tajikistan' },
+  { code: 'UZ', name: 'Uzbekistan' },
+];
 
 export const SURVEY_STEPS: SurveyStepData[] = [
   {

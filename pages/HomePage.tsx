@@ -1,13 +1,13 @@
+
 import React, { useState, useCallback } from 'react';
 import SurveyStep from '../components/SurveyStep';
 import LoadingSpinner from '../components/LoadingSpinner';
 import GiftResults from '../components/GiftResults';
 import GiftOpeningAnimation from '../components/GiftOpeningAnimation';
 import WhyPodariAI from '../components/WhyPodariAI';
-import { SURVEY_STEPS } from '../constants';
+import { SURVEY_STEPS, REGIONS } from '../constants';
 import { getGiftSuggestions } from '../services/geminiService';
-import { SurveyAnswers, GiftSuggestion } from '../types';
-import { Language } from '../App';
+import { SurveyAnswers, GiftSuggestion, Language, RegionCode } from '../types';
 
 type AppState = 'survey' | 'loading' | 'opening' | 'results' | 'error';
 
@@ -15,10 +15,11 @@ interface HomePageProps {
   wishlist: GiftSuggestion[];
   onAddToWishlist: (gift: GiftSuggestion) => void;
   language: Language;
+  region: RegionCode;
   t: any; // Using 'any' for simplicity, could be typed more strictly
 }
 
-const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language, t }) => {
+const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language, region, t }) => {
   const [appState, setAppState] = useState<AppState>('survey');
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<SurveyAnswers>({});
@@ -33,11 +34,12 @@ const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language
     setGiftSuggestions([]);
   };
 
-  const fetchGifts = useCallback(async (finalAnswers: SurveyAnswers, lang: Language) => {
+  const fetchGifts = useCallback(async (finalAnswers: SurveyAnswers, lang: Language, reg: RegionCode) => {
     setAppState('loading');
     setError(null);
+    const regionName = REGIONS.find(r => r.code === reg)?.name || 'Russia';
     try {
-      const suggestions = await getGiftSuggestions(finalAnswers, lang);
+      const suggestions = await getGiftSuggestions(finalAnswers, lang, regionName);
       setGiftSuggestions(suggestions);
       setAppState('opening');
     } catch (err) {
@@ -57,7 +59,7 @@ const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language
     if (currentStep < SURVEY_STEPS.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      fetchGifts(newAnswers, language);
+      fetchGifts(newAnswers, language, region);
     }
   };
 

@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
-import LanguageSwitcher from './LanguageSwitcher';
-import { Page, Language } from '../App';
+import { Page } from '../App';
 
 interface NavbarProps {
-  t: any;
-  language: Language;
-  setLanguage: (lang: Language) => void;
   setCurrentPage: (page: Page) => void;
   currentPage: Page;
+  t: {
+    navHome: string;
+    navTrending: string;
+    navAbout: string;
+    navSettings: string;
+  }
 }
 
-const Navbar: React.FC<NavbarProps> = ({ t, language, setLanguage, setCurrentPage, currentPage }) => {
+const Navbar: React.FC<NavbarProps> = ({ setCurrentPage, currentPage, t }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { page: 'home' as Page, label: 'Home' },
-    { page: 'trending' as Page, label: 'Trending Gifts' },
-    { page: 'about' as Page, label: 'About Us' },
+    { page: 'home' as Page, label: t.navHome },
+    { page: 'trending' as Page, label: t.navTrending },
+    { page: 'about' as Page, label: t.navAbout },
   ];
 
   const NavLink: React.FC<{ page: Page, children: React.ReactNode }> = ({ page, children }) => (
@@ -34,6 +36,24 @@ const Navbar: React.FC<NavbarProps> = ({ t, language, setLanguage, setCurrentPag
       {children}
     </button>
   );
+  
+  const SettingsButton: React.FC<{ isMobile?: boolean }> = ({ isMobile = false }) => (
+     <button
+        onClick={() => {
+          setCurrentPage('settings');
+          setIsMenuOpen(false);
+        }}
+        className={`transition-colors ${
+          isMobile 
+            ? `w-full text-left px-3 py-2 rounded-md text-sm font-medium ${currentPage === 'settings' ? 'text-white bg-slate-700' : 'text-slate-300 hover:bg-slate-800 hover:text-white'}`
+            : `p-2 rounded-full ${currentPage === 'settings' ? 'text-white bg-slate-700' : 'text-slate-400 hover:bg-slate-800 hover:text-white'}`}`}
+        aria-label={t.navSettings}
+      >
+        <i className="fas fa-cog text-lg"></i>
+        {isMobile && <span className="ml-2">{t.navSettings}</span>}
+      </button>
+  );
+
 
   return (
     <nav className="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-40 border-b border-slate-800">
@@ -53,7 +73,7 @@ const Navbar: React.FC<NavbarProps> = ({ t, language, setLanguage, setCurrentPag
             {navLinks.map(link => (
               <NavLink key={link.page} page={link.page}>{link.label}</NavLink>
             ))}
-            <LanguageSwitcher language={language} setLanguage={setLanguage} />
+            <SettingsButton />
           </div>
           <div className="md:hidden flex items-center">
              <button
@@ -75,8 +95,8 @@ const Navbar: React.FC<NavbarProps> = ({ t, language, setLanguage, setCurrentPag
             {navLinks.map(link => (
               <NavLink key={link.page} page={link.page}>{link.label}</NavLink>
             ))}
-            <div className="pt-2">
-              <LanguageSwitcher language={language} setLanguage={setLanguage} />
+             <div className="pt-2 w-full">
+               <SettingsButton isMobile={true}/>
             </div>
           </div>
         </div>
