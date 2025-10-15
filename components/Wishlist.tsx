@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { GiftSuggestion } from '../types';
 
@@ -32,7 +31,7 @@ const Wishlist: React.FC<WishlistProps> = ({ items, onRemove, onClose, t }) => {
       role="dialog"
     >
       <div 
-        className="bg-slate-800 rounded-lg shadow-2xl w-full max-w-2xl max-h-[80vh] flex flex-col"
+        className="bg-slate-800 rounded-lg shadow-2xl w-[95%] max-w-2xl max-h-[80vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         <header className="flex justify-between items-center p-4 border-b border-slate-700 flex-shrink-0">
@@ -45,7 +44,7 @@ const Wishlist: React.FC<WishlistProps> = ({ items, onRemove, onClose, t }) => {
           </button>
         </header>
         
-        <div className="overflow-y-auto p-6">
+        <div className="overflow-y-auto p-4 sm:p-6">
           {items.length === 0 ? (
             <div className="text-center py-10">
               <p className="text-slate-400">{t.wishlistEmpty}</p>
@@ -59,14 +58,14 @@ const Wishlist: React.FC<WishlistProps> = ({ items, onRemove, onClose, t }) => {
                   className="flex items-center bg-slate-900 p-3 rounded-lg animate-drop-in"
                   style={{ animationDelay: `${index * 50}ms` } as React.CSSProperties}
                   >
-                  <img src={`https://picsum.photos/seed/${encodeURIComponent(item.name)}/100/100`} alt={item.name} className="w-16 h-16 object-cover rounded-md mr-4"/>
-                  <div className="flex-grow">
-                    <h3 className="font-bold text-white">{item.name}</h3>
+                  <img src={`https://picsum.photos/seed/${encodeURIComponent(item.name)}/100/100`} alt={item.name} className="w-16 h-16 object-cover rounded-md mr-4 flex-shrink-0"/>
+                  <div className="flex-grow min-w-0">
+                    <h3 className="font-bold text-white truncate">{item.name}</h3>
                     <p className="text-sm text-slate-400">{item.price}</p>
                   </div>
                   <button 
                     onClick={() => onRemove(item.name)} 
-                    className="w-10 h-10 flex-shrink-0 bg-red-600 text-white rounded-full flex items-center justify-center hover:bg-red-700 transition-transform transform hover:scale-110"
+                    className="w-10 h-10 flex-shrink-0 bg-red-600 text-white rounded-full flex items-center justify-center hover:bg-red-700 transition-transform transform hover:scale-110 ml-3"
                     aria-label={`${t.remove} ${item.name}`}
                   >
                     <i className="fas fa-trash"></i>

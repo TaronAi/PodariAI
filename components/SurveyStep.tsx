@@ -47,7 +47,7 @@ const SurveyStep: React.FC<SurveyStepProps> = ({ stepData, onNext, language, t }
   if (stepData.id === 'socialLink') {
     return (
         <div className="flex flex-col items-center animate-fade-in">
-            <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-center">{stepData.question[language]}</h2>
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-6 text-center">{stepData.question[language]}</h2>
             <form onSubmit={(e) => {
                 e.preventDefault();
                 onNext({ id: stepData.id, value: socialLink || 'not provided' });
@@ -79,7 +79,7 @@ const SurveyStep: React.FC<SurveyStepProps> = ({ stepData, onNext, language, t }
 
   return (
     <div className="flex flex-col items-center animate-fade-in">
-      <h2 className="text-2xl md:text-3xl font-semibold mb-8 text-center">{stepData.question[language]}</h2>
+      <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-8 text-center">{stepData.question[language]}</h2>
       
       <div
         className={
@@ -95,7 +95,7 @@ const SurveyStep: React.FC<SurveyStepProps> = ({ stepData, onNext, language, t }
             className={`
               ${stepData.type === OptionType.IMAGE
                 ? 'relative rounded-lg overflow-hidden group border-2 border-slate-700 hover:border-purple-500 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500'
-                : 'w-full bg-slate-800 hover:bg-purple-600 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg'
+                : 'w-full bg-slate-800 hover:bg-purple-600 text-white font-bold py-3 sm:py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg'
               }
             `}
           >
@@ -113,7 +113,7 @@ const SurveyStep: React.FC<SurveyStepProps> = ({ stepData, onNext, language, t }
         {stepData.allowOther && (
             <button
               onClick={handleOtherButtonClick}
-              className={`w-full font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg ${
+              className={`w-full font-bold py-3 sm:py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg ${
                 isOtherInputVisible
                   ? 'bg-purple-800 text-white ring-2 ring-purple-500'
                   : 'bg-slate-700 hover:bg-purple-800 text-slate-300'
