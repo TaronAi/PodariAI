@@ -1,6 +1,6 @@
 
 export interface LocalizedString {
-  ru: string;
+  cy: string;
   en: string;
 }
 
@@ -20,9 +20,9 @@ export interface GiftSuggestion {
   name: string;
   description: string;
   price: string;
-  ozonLink: string;
-  wildberriesLink: string;
-  yandexMarketLink: string;
+  marketplace1Link: string;
+  marketplace2Link: string;
+  marketplace3Link: string;
   otherOptions: string;
   imagePrompt: string;
 }
@@ -47,8 +47,8 @@ export interface SurveyStepData {
 }
 
 // Updated Types for Settings
-export type RegionCode = 'RU' | 'AM' | 'BY' | 'GE' | 'KZ' | 'KG' | 'TJ' | 'UZ';
-export type Language = 'ru' | 'en';
+export type RegionCode = 'CY';
+export type Language = 'cy' | 'en';
 
 export interface Region {
   code: RegionCode;

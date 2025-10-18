@@ -37,7 +37,7 @@ const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language
   const fetchGifts = useCallback(async (finalAnswers: SurveyAnswers, lang: Language, reg: RegionCode) => {
     setAppState('loading');
     setError(null);
-    const regionName = REGIONS.find(r => r.code === reg)?.name || 'Russia';
+    const regionName = REGIONS.find(r => r.code === reg)?.name || 'Cyprus';
     try {
       const suggestions = await getGiftSuggestions(finalAnswers, lang, regionName);
       setGiftSuggestions(suggestions);

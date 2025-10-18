@@ -14,64 +14,64 @@ interface TrendingPageProps {
 
 const trendingGifts: GiftSuggestion[] = [
     {
-        name: "Smart Garden Kit",
-        description: "An indoor herb garden that automates watering and light. Perfect for aspiring home cooks and tech lovers.",
-        price: "8,000₽",
-        ozonLink: "https://www.ozon.ru/search/?text=smart+garden+kit",
-        wildberriesLink: "https://www.wildberries.ru/catalog/0/search.aspx?search=smart+garden+kit",
-        yandexMarketLink: "https://market.yandex.ru/search?text=smart+garden+kit",
-        otherOptions: "Available in home & garden or electronics stores.",
-        imagePrompt: "smart garden"
+        name: "Frappe Maker",
+        description: "An essential for any Cypriot household. Make the perfect ice-cold frappe at home.",
+        price: "€25",
+        marketplace1Link: "https://www.public.cy/search/frappe-maker",
+        marketplace2Link: "https://www.stephanis.com.cy/en/search?q=frappe%20maker",
+        marketplace3Link: "https://www.skroutz.com.cy/search?keyphrase=frappe+maker",
+        otherOptions: "Available in all major home appliance stores.",
+        imagePrompt: "frappe maker"
     },
     {
-        name: "Portable Projector",
-        description: "Turn any room into a cinema with this compact and powerful projector. Great for movie nights or presentations.",
-        price: "15,000₽",
-        ozonLink: "https://www.ozon.ru/search/?text=portable+projector",
-        wildberriesLink: "https://www.wildberries.ru/catalog/0/search.aspx?search=portable+projector",
-        yandexMarketLink: "https://market.yandex.ru/search?text=portable+projector",
-        otherOptions: "Find in major electronics retailers.",
-        imagePrompt: "portable projector"
+        name: "High-Quality Beach Towel",
+        description: "A large, absorbent, and stylish beach towel. Perfect for Cyprus's beautiful beaches.",
+        price: "€40",
+        marketplace1Link: "https://www.amazon.de/s?k=beach+towel",
+        marketplace2Link: "https://www.skroutz.com.cy/c/2435/Petsedes-Thalassis.html",
+        marketplace3Link: "https://www.next.com.cy/en/search/keywords-beach-towel",
+        otherOptions: "Find in department stores and beachwear shops.",
+        imagePrompt: "luxury beach towel on sand"
     },
     {
-        name: "Weighted Blanket",
-        description: "A cozy blanket designed to reduce anxiety and improve sleep quality through gentle, calming pressure.",
-        price: "6,500₽",
-        ozonLink: "https://www.ozon.ru/search/?text=weighted+blanket",
-        wildberriesLink: "https://www.wildberries.ru/catalog/0/search.aspx?search=weighted+blanket",
-        yandexMarketLink: "https://market.yandex.ru/search?text=weighted+blanket",
-        otherOptions: "Available in home goods stores and online.",
-        imagePrompt: "weighted blanket"
+        name: "Backgammon (Tavli) Set",
+        description: "A beautiful wooden backgammon set for long afternoons at the local 'kafeneio' or at home.",
+        price: "€50",
+        marketplace1Link: "https://www.public.cy/search/tavli",
+        marketplace2Link: "https://www.amazon.de/s?k=backgammon+set",
+        marketplace3Link: "https://www.skroutz.com.cy/c/1831/Tavli.html",
+        otherOptions: "Available in toy and traditional gift shops.",
+        imagePrompt: "wooden backgammon set"
     },
     {
-        name: "MasterClass Subscription",
-        description: "Unlock access to online classes taught by the world's best in cooking, writing, science, and more.",
-        price: "12,000₽",
-        ozonLink: "https://www.masterclass.com/",
-        wildberriesLink: "https://www.masterclass.com/",
-        yandexMarketLink: "https://www.masterclass.com/",
-        otherOptions: "Purchase directly from the MasterClass website.",
-        imagePrompt: "online class"
+        name: "Local Winery Tour & Tasting",
+        description: "An experience gift to explore one of Cyprus's many excellent wineries in the Troodos mountains.",
+        price: "€60",
+        marketplace1Link: "https://www.vlassideswinery.com/",
+        marketplace2Link: "https://www.oenouyi.com/vineyard-and-winery-tour-and-tasting/",
+        marketplace3Link: "https://www.facebook.com/Tsiakkas.winery/",
+        otherOptions: "Book directly with wineries like Vlassides or Tsiakkas.",
+        imagePrompt: "wine tasting in a vineyard"
     },
     {
-        name: "Artisan Coffee Set",
-        description: "A curated selection of single-origin coffee beans, a high-quality grinder, and a French press.",
-        price: "5,000₽",
-        ozonLink: "https://www.ozon.ru/search/?text=artisan+coffee+set",
-        wildberriesLink: "https://www.wildberries.ru/catalog/0/search.aspx?search=artisan+coffee+set",
-        yandexMarketLink: "https://market.yandex.ru/search?text=artisan+coffee+set",
-        otherOptions: "Specialty coffee shops often sell these.",
-        imagePrompt: "coffee set"
+        name: "Designer Sunglasses",
+        description: "A stylish and essential accessory for the sunny Cypriot climate. Protect your eyes in style.",
+        price: "€150",
+        marketplace1Link: "https://www.public.cy/search/sunglasses",
+        marketplace2Link: "https://www.amazon.de/s?k=designer+sunglasses",
+        marketplace3Link: "https://www.skroutz.com.cy/c/1058/gualia-hliou.html",
+        otherOptions: "Available at all major opticians and fashion retailers.",
+        imagePrompt: "designer sunglasses on a cafe table"
     },
     {
-        name: "Virtual Reality Headset",
-        description: "Dive into immersive games and experiences with a cutting-edge VR headset. The ultimate tech gift.",
-        price: "35,000₽",
-        ozonLink: "https://www.ozon.ru/search/?text=vr+headset",
-        wildberriesLink: "https://www.wildberries.ru/catalog/0/search.aspx?search=vr+headset",
-        yandexMarketLink: "https://market.yandex.ru/search?text=vr+headset",
-        otherOptions: "Check prices at DNS, M.Video, and Eldorado.",
-        imagePrompt: "vr headset"
+        name: "Air Fryer",
+        description: "A trending kitchen gadget for healthier and quicker cooking. Great for making Cypriot 'sheftalies' or fries.",
+        price: "€90",
+        marketplace1Link: "https://www.public.cy/search/air-fryer",
+        marketplace2Link: "https://www.stephanis.com.cy/en/search?q=air%20fryer",
+        marketplace3Link: "https://www.skroutz.com.cy/search?keyphrase=air+fryer",
+        otherOptions: "Check prices at major electronics retailers.",
+        imagePrompt: "modern air fryer in a kitchen"
     }
 ];
 
@@ -113,14 +113,14 @@ const TrendingPage: React.FC<TrendingPageProps> = ({ t, onAddToWishlist, wishlis
                 <div className="border-t border-slate-700 pt-4">
                   <p className="text-sm font-semibold text-slate-400 mb-3">{t.whereToBuy}:</p>
                   <div className="flex flex-col space-y-2 text-sm">
-                    <a href={gift.ozonLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
-                      <i className="fas fa-shopping-cart mr-2"></i>Ozon
+                    <a href={gift.marketplace1Link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
+                      <i className="fas fa-shopping-cart mr-2"></i>Shop 1
                     </a>
-                    <a href={gift.wildberriesLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-white bg-purple-600 hover:bg-purple-700 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
-                      <i className="fas fa-shopping-cart mr-2"></i>Wildberries
+                    <a href={gift.marketplace2Link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-white bg-purple-600 hover:bg-purple-700 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
+                      <i className="fas fa-shopping-cart mr-2"></i>Shop 2
                     </a>
-                    <a href={gift.yandexMarketLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-white bg-red-500 hover:bg-red-600 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
-                      <i className="fas fa-shopping-cart mr-2"></i>Yandex Market
+                    <a href={gift.marketplace3Link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-white bg-red-500 hover:bg-red-600 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
+                      <i className="fas fa-shopping-cart mr-2"></i>Shop 3
                     </a>
                   </div>
                   <p className="text-xs text-slate-500 mt-4 text-center">{gift.otherOptions}</p>

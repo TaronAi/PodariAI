@@ -71,7 +71,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
             onChange={handleLanguageChange}
             className={selectStyles}
           >
-            <option value="ru">Русский</option>
+            <option value="cy">Ελληνικά</option>
             <option value="en">English</option>
           </select>
         </div>

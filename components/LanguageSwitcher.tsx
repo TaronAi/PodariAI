@@ -1,8 +1,9 @@
 import React from 'react';
+import { Language } from '../types';
 
 interface LanguageSwitcherProps {
-  language: 'ru' | 'en';
-  setLanguage: (lang: 'ru' | 'en') => void;
+  language: Language;
+  setLanguage: (lang: Language) => void;
 }
 
 const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ language, setLanguage }) => {
@@ -13,11 +14,11 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ language, setLangua
   return (
     <div className="bg-slate-800 p-1 rounded-lg shadow-md border border-slate-700 flex">
       <button
-        onClick={() => setLanguage('ru')}
-        className={`${baseClasses} ${language === 'ru' ? activeClasses : inactiveClasses}`}
-        aria-pressed={language === 'ru'}
+        onClick={() => setLanguage('cy')}
+        className={`${baseClasses} ${language === 'cy' ? activeClasses : inactiveClasses}`}
+        aria-pressed={language === 'cy'}
       >
-        RU
+        CY
       </button>
       <button
         onClick={() => setLanguage('en')}

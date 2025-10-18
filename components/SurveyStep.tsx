@@ -23,7 +23,7 @@ const SurveyStep: React.FC<SurveyStepProps> = ({ stepData, onNext, language, t }
   const [otherValue, setOtherValue] = useState('');
 
   // Fix: Added a language key with a fallback to 'en'. The `LocalizedString` type only has 'ru' and 'en' keys. This ensures that for any language other than Russian, the English text is used.
-  const langKey = language === 'ru' ? 'ru' : 'en';
+  const langKey = language === 'cy' ? 'cy' : 'en';
 
   // Reset local state when the survey step (question) changes
   useEffect(() => {

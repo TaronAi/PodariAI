@@ -54,14 +54,14 @@ const GiftResults: React.FC<GiftResultsProps> = ({ suggestions, onReset, onAddTo
                 <div className="border-t border-slate-700 pt-4">
                   <p className="text-sm font-semibold text-slate-400 mb-3">{t.whereToBuy}:</p>
                   <div className="flex flex-col space-y-2 text-sm">
-                    <a href={gift.ozonLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
-                      <i className="fas fa-shopping-cart mr-2"></i>Ozon
+                    <a href={gift.marketplace1Link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
+                      <i className="fas fa-shopping-cart mr-2"></i>Shop 1
                     </a>
-                    <a href={gift.wildberriesLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-white bg-purple-600 hover:bg-purple-700 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
-                      <i className="fas fa-shopping-cart mr-2"></i>Wildberries
+                    <a href={gift.marketplace2Link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-white bg-purple-600 hover:bg-purple-700 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
+                      <i className="fas fa-shopping-cart mr-2"></i>Shop 2
                     </a>
-                    <a href={gift.yandexMarketLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-white bg-red-500 hover:bg-red-600 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
-                      <i className="fas fa-shopping-cart mr-2"></i>Yandex Market
+                    <a href={gift.marketplace3Link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-white bg-red-500 hover:bg-red-600 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
+                      <i className="fas fa-shopping-cart mr-2"></i>Shop 3
                     </a>
                   </div>
                   <p className="text-xs text-slate-500 mt-4 text-center">{gift.otherOptions}</p>

@@ -6,7 +6,7 @@ const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
 
 // Mapping language codes to full language names for the prompt
 const languageMap: Record<Language, string> = {
-  ru: 'Russian',
+  cy: 'Greek',
   en: 'English',
 };
 
@@ -15,7 +15,7 @@ export const getGiftSuggestions = async (answers: SurveyAnswers, language: Langu
   
   const prompt = `
     You are an expert gift-giving assistant. Your response must be exclusively in the ${fullLanguageName} language.
-    The gift suggestions should be tailored for the ${region} market.
+    The gift suggestions should be tailored for the Cyprus market.
     Based on the following user preferences, generate 6 creative and thoughtful gift ideas.
     
     Preferences:
@@ -32,11 +32,11 @@ export const getGiftSuggestions = async (answers: SurveyAnswers, language: Langu
     For each gift idea, provide:
     1. A name for the gift.
     2. A short, compelling description.
-    3. An estimated price in the local currency that fits the budget (e.g., RUB, AMD, KZT).
-    4. A fictional but realistic-looking affiliate link for a major local online marketplace (like Ozon for Russia, or an equivalent for the specified region).
-    5. A fictional but realistic-looking affiliate link for a second major local online marketplace.
-    6. A fictional but realistic-looking affiliate link for a third major local online marketplace.
-    7. A suggestion for a local store type or a specific subscription service relevant to the region (e.g., "Available in electronics stores like M.Video" or "Consider a subscription to 'Amediateka'").
+    3. An estimated price in Euros that fits the budget (e.g., €45, €90).
+    4. A fictional but realistic-looking affiliate link for a major local or international online marketplace popular in Cyprus (e.g., Public.cy, Stephanis).
+    5. A fictional but realistic-looking affiliate link for a second major online marketplace (e.g., Skroutz.com.cy, Amazon).
+    6. A fictional but realistic-looking affiliate link for a third option.
+    7. A suggestion for a local store type or a specific subscription service relevant to Cyprus (e.g., "Available in electronics stores like Stephanis" or "Consider a subscription to a local service").
     8. A descriptive prompt for an image generation model to create a visually appealing, photorealistic image of the gift (e.g., "A sleek black smartwatch on a wooden desk next to a laptop").
 
     Return the result as a JSON array of objects.
@@ -55,14 +55,14 @@ export const getGiftSuggestions = async (answers: SurveyAnswers, language: Langu
             properties: {
               name: { type: Type.STRING, description: 'The name of the gift.' },
               description: { type: Type.STRING, description: 'A short description of the gift.' },
-              price: { type: Type.STRING, description: 'Estimated price in local currency.' },
-              ozonLink: { type: Type.STRING, description: 'Affiliate link for a major local marketplace.' },
-              wildberriesLink: { type: Type.STRING, description: 'Affiliate link for a second local marketplace.' },
-              yandexMarketLink: { type: Type.STRING, description: 'Affiliate link for a third local marketplace.' },
+              price: { type: Type.STRING, description: 'Estimated price in Euros.' },
+              marketplace1Link: { type: Type.STRING, description: 'Affiliate link for a major local/international marketplace.' },
+              marketplace2Link: { type: Type.STRING, description: 'Affiliate link for a second marketplace.' },
+              marketplace3Link: { type: Type.STRING, description: 'Affiliate link for a third marketplace.' },
               otherOptions: { type: Type.STRING, description: 'Suggestion for a local store or subscription.' },
               imagePrompt: { type: Type.STRING, description: 'A descriptive prompt for an image generation model to create a visually appealing, photorealistic image of the gift.' },
             },
-            required: ['name', 'description', 'price', 'ozonLink', 'wildberriesLink', 'yandexMarketLink', 'otherOptions', 'imagePrompt'],
+            required: ['name', 'description', 'price', 'marketplace1Link', 'marketplace2Link', 'marketplace3Link', 'otherOptions', 'imagePrompt'],
           },
         },
       },
