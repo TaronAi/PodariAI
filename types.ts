@@ -17,14 +17,11 @@ export interface SurveyAnswers {
 }
 
 export interface GiftSuggestion {
-  name: string;
+  title: string;
   description: string;
   price: string;
-  marketplace1Link: string;
-  marketplace2Link: string;
-  marketplace3Link: string;
-  otherOptions: string;
-  imagePrompt: string;
+  url: string;
+  imageUrl: string;
 }
 
 export enum OptionType {

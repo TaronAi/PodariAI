@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { GiftSuggestion } from '../types';
 
@@ -7,6 +8,7 @@ interface TrendingPageProps {
     whereToBuy: string;
     addToWishlist: string;
     removeFromWishlist: string;
+    buyOnAmazon: string;
   };
   onAddToWishlist: (gift: GiftSuggestion) => void;
   wishlist: GiftSuggestion[];
@@ -14,64 +16,46 @@ interface TrendingPageProps {
 
 const trendingGifts: GiftSuggestion[] = [
     {
-        name: "Frappe Maker",
-        description: "An essential for any Cypriot household. Make the perfect ice-cold frappe at home.",
+        title: "Aerolatte Milk Frother, Original Steam Free with Stand",
+        description: "An essential for any Cypriot household. Make the perfect ice-cold frappe at home with this top-rated frother.",
         price: "€25",
-        marketplace1Link: "https://www.public.cy/search/frappe-maker",
-        marketplace2Link: "https://www.stephanis.com.cy/en/search?q=frappe%20maker",
-        marketplace3Link: "https://www.skroutz.com.cy/search?keyphrase=frappe+maker",
-        otherOptions: "Available in all major home appliance stores.",
-        imagePrompt: "frappe maker"
+        url: "https://www.amazon.co.uk/dp/B0001IXA40?tag=giftfindcy-21",
+        imageUrl: "https://m.media-amazon.com/images/I/611sF4a-t7L._AC_SL1500_.jpg"
     },
     {
-        name: "High-Quality Beach Towel",
+        title: "Utopia Towels Large Beach Towel Cabana Stripe",
         description: "A large, absorbent, and stylish beach towel. Perfect for Cyprus's beautiful beaches.",
         price: "€40",
-        marketplace1Link: "https://www.amazon.de/s?k=beach+towel",
-        marketplace2Link: "https://www.skroutz.com.cy/c/2435/Petsedes-Thalassis.html",
-        marketplace3Link: "https://www.next.com.cy/en/search/keywords-beach-towel",
-        otherOptions: "Find in department stores and beachwear shops.",
-        imagePrompt: "luxury beach towel on sand"
+        url: "https://www.amazon.co.uk/dp/B07595C953?tag=giftfindcy-21",
+        imageUrl: "https://m.media-amazon.com/images/I/9102gL3tJbL._AC_SL1500_.jpg"
     },
     {
-        name: "Backgammon (Tavli) Set",
-        description: "A beautiful wooden backgammon set for long afternoons at the local 'kafeneio' or at home.",
+        title: "Jaques of London Wooden Backgammon Set",
+        description: "A beautiful 15-inch wooden backgammon set for long afternoons at the local 'kafeneio' or at home.",
         price: "€50",
-        marketplace1Link: "https://www.public.cy/search/tavli",
-        marketplace2Link: "https://www.amazon.de/s?k=backgammon+set",
-        marketplace3Link: "https://www.skroutz.com.cy/c/1831/Tavli.html",
-        otherOptions: "Available in toy and traditional gift shops.",
-        imagePrompt: "wooden backgammon set"
+        url: "https://www.amazon.co.uk/dp/B0852HSX3V?tag=giftfindcy-21",
+        imageUrl: "https://m.media-amazon.com/images/I/81kLIaT-E-L._AC_SL1500_.jpg"
     },
     {
-        name: "Local Winery Tour & Tasting",
-        description: "An experience gift to explore one of Cyprus's many excellent wineries in the Troodos mountains.",
-        price: "€60",
-        marketplace1Link: "https://www.vlassideswinery.com/",
-        marketplace2Link: "https://www.oenouyi.com/vineyard-and-winery-tour-and-tasting/",
-        marketplace3Link: "https://www.facebook.com/Tsiakkas.winery/",
-        otherOptions: "Book directly with wineries like Vlassides or Tsiakkas.",
-        imagePrompt: "wine tasting in a vineyard"
+        title: "Cyprus: A Culinary Journey by Georgina Hayden",
+        description: "Learn to cook delicious Cypriot dishes at home with this authentic, highly-rated recipe book.",
+        price: "€25",
+        url: "https://www.amazon.co.uk/dp/1529108233?tag=giftfindcy-21",
+        imageUrl: "https://m.media-amazon.com/images/I/91T1wt9UlIL._AC_UF1000,1000_QL80_.jpg"
     },
     {
-        name: "Designer Sunglasses",
-        description: "A stylish and essential accessory for the sunny Cypriot climate. Protect your eyes in style.",
+        title: "Ray-Ban New Wayfarer Sunglasses",
+        description: "A stylish and essential accessory for the sunny Cypriot climate. Protect your eyes in style with a classic.",
         price: "€150",
-        marketplace1Link: "https://www.public.cy/search/sunglasses",
-        marketplace2Link: "https://www.amazon.de/s?k=designer+sunglasses",
-        marketplace3Link: "https://www.skroutz.com.cy/c/1058/gualia-hliou.html",
-        otherOptions: "Available at all major opticians and fashion retailers.",
-        imagePrompt: "designer sunglasses on a cafe table"
+        url: "https://www.amazon.co.uk/dp/B001GNB24E?tag=giftfindcy-21",
+        imageUrl: "https://m.media-amazon.com/images/I/61a251tL83L._AC_SL1500_.jpg"
     },
     {
-        name: "Air Fryer",
+        title: "COSORI Air Fryer 5.5L",
         description: "A trending kitchen gadget for healthier and quicker cooking. Great for making Cypriot 'sheftalies' or fries.",
         price: "€90",
-        marketplace1Link: "https://www.public.cy/search/air-fryer",
-        marketplace2Link: "https://www.stephanis.com.cy/en/search?q=air%20fryer",
-        marketplace3Link: "https://www.skroutz.com.cy/search?keyphrase=air+fryer",
-        otherOptions: "Check prices at major electronics retailers.",
-        imagePrompt: "modern air fryer in a kitchen"
+        url: "https://www.amazon.co.uk/dp/B07N8HD9pr?tag=giftfindcy-21",
+        imageUrl: "https://m.media-amazon.com/images/I/71i-1tI33CL._AC_SL1500_.jpg"
     }
 ];
 
@@ -83,7 +67,7 @@ const TrendingPage: React.FC<TrendingPageProps> = ({ t, onAddToWishlist, wishlis
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         {trendingGifts.map((gift, index) => {
-          const isInWishlist = wishlist.some(item => item.name === gift.name);
+          const isInWishlist = wishlist.some(item => item.title === gift.title);
           return (
             <div 
               key={index} 
@@ -91,12 +75,12 @@ const TrendingPage: React.FC<TrendingPageProps> = ({ t, onAddToWishlist, wishlis
               >
               <div className="relative h-56 w-full">
                 <img 
-                  src={`https://picsum.photos/seed/${encodeURIComponent(gift.imagePrompt)}/400/300`} 
-                  alt={gift.name} 
+                  src={gift.imageUrl}
+                  alt={gift.title} 
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <h3 className="absolute bottom-4 left-4 text-xl font-bold text-white pr-4">{gift.name}</h3>
+                <h3 className="absolute bottom-4 left-4 text-xl font-bold text-white pr-4">{gift.title}</h3>
                  <button
                     onClick={() => onAddToWishlist(gift)}
                     className={`absolute top-4 right-4 z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 transform group-hover:opacity-100 ${
@@ -113,17 +97,10 @@ const TrendingPage: React.FC<TrendingPageProps> = ({ t, onAddToWishlist, wishlis
                 <div className="border-t border-slate-700 pt-4">
                   <p className="text-sm font-semibold text-slate-400 mb-3">{t.whereToBuy}:</p>
                   <div className="flex flex-col space-y-2 text-sm">
-                    <a href={gift.marketplace1Link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
-                      <i className="fas fa-shopping-cart mr-2"></i>Shop 1
-                    </a>
-                    <a href={gift.marketplace2Link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-white bg-purple-600 hover:bg-purple-700 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
-                      <i className="fas fa-shopping-cart mr-2"></i>Shop 2
-                    </a>
-                    <a href={gift.marketplace3Link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-white bg-red-500 hover:bg-red-600 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
-                      <i className="fas fa-shopping-cart mr-2"></i>Shop 3
+                    <a href={gift.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-slate-900 bg-yellow-400 hover:bg-yellow-500 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
+                      <i className="fab fa-amazon mr-2"></i>{t.buyOnAmazon}
                     </a>
                   </div>
-                  <p className="text-xs text-slate-500 mt-4 text-center">{gift.otherOptions}</p>
                 </div>
               </div>
             </div>

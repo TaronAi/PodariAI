@@ -1,4 +1,3 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 import { SurveyAnswers, GiftSuggestion, Language } from '../types';
 
@@ -10,13 +9,22 @@ const languageMap: Record<Language, string> = {
   en: 'English',
 };
 
-export const getGiftSuggestions = async (answers: SurveyAnswers, language: Language, region: string): Promise<GiftSuggestion[]> => {
+export const getGiftSuggestions = async (
+  answers: SurveyAnswers, 
+  language: Language, 
+  region: string,
+  existingSuggestions: GiftSuggestion[] = []
+): Promise<GiftSuggestion[]> => {
   const fullLanguageName = languageMap[language] || 'English';
   
+  const existingSuggestionsPrompt = existingSuggestions.length > 0
+    ? `Please generate 6 NEW and DIFFERENT gift ideas. Do not repeat any of the following already suggested gifts: ${existingSuggestions.map(g => `"${g.title}"`).join(', ')}.`
+    : `Based on the following user preferences, act as an Amazon Product Search API to find 6 real-world gift ideas available on amazon.co.uk for delivery to Cyprus.`;
+
   const prompt = `
-    You are an expert gift-giving assistant. Your response must be exclusively in the ${fullLanguageName} language.
-    The gift suggestions should be tailored for the Cyprus market.
-    Based on the following user preferences, generate 6 creative and thoughtful gift ideas.
+    You are an expert gift-giving assistant who simulates the Amazon Product Advertising API. Your response must be exclusively in the ${fullLanguageName} language.
+    The gift suggestions must be real products found on amazon.co.uk.
+    ${existingSuggestionsPrompt}
     
     Preferences:
     - Gift for: ${answers.recipient}
@@ -27,19 +35,15 @@ export const getGiftSuggestions = async (answers: SurveyAnswers, language: Langu
     - Preferred Style (based on house choice): ${answers.style}
     - Preferred Activity: ${answers.activity}
     - Gift Type: ${answers.giftType}
-    ${answers.socialLink && answers.socialLink !== 'not provided' ? `- Social Media Profile for analysis (be careful with assumptions): ${answers.socialLink}` : ''}
 
     For each gift idea, provide:
-    1. A name for the gift.
-    2. A short, compelling description.
-    3. An estimated price in Euros that fits the budget (e.g., €45, €90).
-    4. A fictional but realistic-looking affiliate link for a major local or international online marketplace popular in Cyprus (e.g., Public.cy, Stephanis).
-    5. A fictional but realistic-looking affiliate link for a second major online marketplace (e.g., Skroutz.com.cy, Amazon).
-    6. A fictional but realistic-looking affiliate link for a third option.
-    7. A suggestion for a local store type or a specific subscription service relevant to Cyprus (e.g., "Available in electronics stores like Stephanis" or "Consider a subscription to a local service").
-    8. A descriptive prompt for an image generation model to create a visually appealing, photorealistic image of the gift (e.g., "A sleek black smartwatch on a wooden desk next to a laptop").
+    1. title: The exact product title from Amazon.
+    2. description: A short, compelling description of the product.
+    3. price: An estimated price in Euros that fits the budget (e.g., "€45", "€90").
+    4. url: A valid affiliate link to the product on amazon.co.uk. It must include an affiliate tag like "?tag=giftfindcy-21".
+    5. imageUrl: A direct, realistic URL to a high-quality product image from Amazon's servers (e.g., "https://m.media-amazon.com/images/I/....jpg").
 
-    Return the result as a JSON array of objects.
+    Return the result as a JSON array of objects. Do not include any markdown formatting.
   `;
 
   try {
@@ -53,25 +57,20 @@ export const getGiftSuggestions = async (answers: SurveyAnswers, language: Langu
           items: {
             type: Type.OBJECT,
             properties: {
-              name: { type: Type.STRING, description: 'The name of the gift.' },
+              title: { type: Type.STRING, description: 'The exact product title from Amazon.' },
               description: { type: Type.STRING, description: 'A short description of the gift.' },
               price: { type: Type.STRING, description: 'Estimated price in Euros.' },
-              marketplace1Link: { type: Type.STRING, description: 'Affiliate link for a major local/international marketplace.' },
-              marketplace2Link: { type: Type.STRING, description: 'Affiliate link for a second marketplace.' },
-              marketplace3Link: { type: Type.STRING, description: 'Affiliate link for a third marketplace.' },
-              otherOptions: { type: Type.STRING, description: 'Suggestion for a local store or subscription.' },
-              imagePrompt: { type: Type.STRING, description: 'A descriptive prompt for an image generation model to create a visually appealing, photorealistic image of the gift.' },
+              url: { type: Type.STRING, description: 'Affiliate link for the product on amazon.co.uk.' },
+              imageUrl: { type: Type.STRING, description: 'A direct URL to a high-quality product image from Amazon.' },
             },
-            required: ['name', 'description', 'price', 'marketplace1Link', 'marketplace2Link', 'marketplace3Link', 'otherOptions', 'imagePrompt'],
+            required: ['title', 'description', 'price', 'url', 'imageUrl'],
           },
         },
       },
     });
 
     const jsonText = response.text.trim();
-    // A quick fix for potential markdown in the response
-    const sanitizedJsonText = jsonText.replace(/^```json\n/, '').replace(/\n```$/, '');
-    const suggestions = JSON.parse(sanitizedJsonText);
+    const suggestions = JSON.parse(jsonText);
     return suggestions as GiftSuggestion[];
 
   } catch (error) {

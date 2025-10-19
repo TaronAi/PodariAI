@@ -27,15 +27,15 @@ const App: React.FC = () => {
 
   const handleAddToWishlist = (gift: GiftSuggestion) => {
     setWishlist((prevWishlist) => {
-      if (prevWishlist.some((item) => item.name === gift.name)) {
-        return prevWishlist.filter((item) => item.name !== gift.name);
+      if (prevWishlist.some((item) => item.title === gift.title)) {
+        return prevWishlist.filter((item) => item.title !== gift.title);
       }
       return [...prevWishlist, gift];
     });
   };
 
-  const handleRemoveFromWishlist = (giftName: string) => {
-    setWishlist((prevWishlist) => prevWishlist.filter((item) => item.name !== giftName));
+  const handleRemoveFromWishlist = (giftTitle: string) => {
+    setWishlist((prevWishlist) => prevWishlist.filter((item) => item.title !== giftTitle));
   };
 
   const renderContent = () => {

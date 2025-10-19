@@ -23,7 +23,10 @@ export const i18n: any = {
     // Gift Results
     resultsTitle: 'Ορίστε οι ιδέες δώρων σας!',
     whereToBuy: 'Πού να αγοράσετε',
+    buyOnAmazon: 'Αγορά στο Amazon',
     startOver: 'Ξεκινήστε από την αρχή',
+    showMoreGifts: 'Δείξε περισσότερα δώρα',
+    loadingMore: 'Φόρτωση...',
     addToWishlist: 'Προσθήκη στη λίστα επιθυμιών',
     removeFromWishlist: 'Αφαίρεση από τη λίστα επιθυμιών',
     // Wishlist
@@ -91,7 +94,10 @@ export const i18n: any = {
     // Gift Results
     resultsTitle: 'Here are your gift ideas!',
     whereToBuy: 'Where to buy',
+    buyOnAmazon: 'Buy on Amazon',
     startOver: 'Start Over',
+    showMoreGifts: 'Show More Gifts',
+    loadingMore: 'Loading...',
     addToWishlist: 'Add to wishlist',
     removeFromWishlist: 'Remove from wishlist',
     // Wishlist

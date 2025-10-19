@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from 'react';
 import SurveyStep from '../components/SurveyStep';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -25,6 +24,7 @@ const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language
   const [answers, setAnswers] = useState<SurveyAnswers>({});
   const [error, setError] = useState<string | null>(null);
   const [giftSuggestions, setGiftSuggestions] = useState<GiftSuggestion[]>([]);
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
 
   const handleReset = () => {
     setAppState('survey');
@@ -51,6 +51,20 @@ const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language
       setAppState('error');
     }
   }, []);
+
+  const fetchMoreGifts = useCallback(async () => {
+    setIsFetchingMore(true);
+    const regionName = REGIONS.find(r => r.code === region)?.name || 'Cyprus';
+    try {
+      const newSuggestions = await getGiftSuggestions(answers, language, regionName, giftSuggestions);
+      setGiftSuggestions(prev => [...prev, ...newSuggestions]);
+    } catch (err) {
+       console.error("Failed to fetch more gifts:", err);
+       // Optional: Show a small, non-disruptive error to the user
+    } finally {
+      setIsFetchingMore(false);
+    }
+  }, [answers, language, region, giftSuggestions]);
 
   const handleNextStep = (answer: { id: keyof SurveyAnswers; value: string }) => {
     const newAnswers = { ...answers, [answer.id]: answer.value };
@@ -87,7 +101,17 @@ const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language
       case 'opening':
         return <GiftOpeningAnimation onAnimationComplete={handleAnimationComplete} t={t} />;
       case 'results':
-        return <GiftResults suggestions={giftSuggestions} onReset={handleReset} onAddToWishlist={onAddToWishlist} wishlist={wishlist} t={t} />;
+        return (
+          <GiftResults 
+            suggestions={giftSuggestions} 
+            onReset={handleReset} 
+            onAddToWishlist={onAddToWishlist} 
+            wishlist={wishlist}
+            onFetchMore={fetchMoreGifts}
+            isFetchingMore={isFetchingMore}
+            t={t} 
+          />
+        );
       case 'survey':
       default:
         const stepData = SURVEY_STEPS[currentStep];
