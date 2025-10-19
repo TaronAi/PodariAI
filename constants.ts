@@ -7,9 +7,6 @@ export const i18n: any = {
     // SurveyStep
     other: 'Άλλο',
     submit: 'Υποβολή',
-    socialLinkPlaceholder: 'https://instagram.com/example',
-    findGifts: 'Βρες Δώρα',
-    skip: 'Παράλειψη',
     // Loading Spinner
     loadingMessages: [
         "Η AI δημιουργεί ιδέες...",
@@ -39,13 +36,11 @@ export const i18n: any = {
     errorTitle: 'Παρουσιάστηκε σφάλμα',
     tryAgain: 'Προσπαθήστε ξανά',
     // Why
-    whyTitle: 'Γιατί το GiftFinder AI;',
+    whyTitle: 'Γιατί το Podari AI;',
     why1Title: 'Πραγματική AI',
     why1Desc: 'Όχι απλά φίλτρα—η AI μας μαθαίνει και δημιουργεί νέες ιδέες αναλύοντας χιλιάδες επιλογές.',
     why2Title: 'Όλα τα καταστήματα ταυτόχρονα',
     why2Desc: 'Βρίσκουμε τις καλύτερες επιλογές σε Public.cy, Stephanis και Skroutz ώστε να μπορείτε να συγκρίνετε.',
-    why3Title: 'Ανάλυση Social Media',
-    why3Desc: 'Προαιρετικό: επικολλήστε έναν σύνδεσμο προφίλ για να μαντέψει η AI με μεγαλύτερη ακρίβεια τα ενδιαφέροντα του ατόμου.',
     why4Title: 'Λίστες Επιθυμιών & Προφίλ',
     why4Desc: 'Αποθηκεύστε ιδέες σε λίστες επιθυμιών και δημιουργήστε προφίλ για αγαπημένα πρόσωπα για να μην ξεχνάτε σημαντικές ημερομηνίες.',
     why5Title: 'Ευρύ φάσμα',
@@ -63,14 +58,14 @@ export const i18n: any = {
     settingsLanguage: 'Γλώσσα',
     footerHome: 'Αρχική',
     footerAbout: 'Σχετικά με εμάς',
-    footerCopyright: `© ${new Date().getFullYear()} GiftFinder AI. Με επιφύλαξη παντός δικαιώματος.`,
+    footerCopyright: `© ${new Date().getFullYear()} Podari AI. Με επιφύλαξη παντός δικαιώματος.`,
     wishlistAria: 'Άνοιγμα λίστας επιθυμιών',
     trendingTitle: 'Δημοφιλή Δώρα',
-    aboutTitle: 'Σχετικά με το GiftFinder AI',
-    aboutParagraph1: "Πιστεύουμε ότι το τέλειο δώρο είναι κάτι περισσότερο από ένα απλό αντικείμενο—είναι μια στοχαστική έκφραση σύνδεσης. Σε έναν κόσμο ατελείωτων επιλογών, η εύρεση του τέλειου δώρου μπορεί να είναι συντριπτική. Γι' αυτό δημιουργήσαμε το GiftFinder AI.",
+    aboutTitle: 'Σχετικά με το Podari AI',
+    aboutParagraph1: "Πιστεύουμε ότι το τέλειο δώρο είναι κάτι περισσότερο από ένα απλό αντικείμενο—είναι μια στοχαστική έκφραση σύνδεσης. Σε έναν κόσμο ατελείωτων επιλογών, η εύρεση του τέλειου δώρου μπορεί να είναι συντριπτική. Γι' αυτό δημιουργήσαμε το Podari AI.",
     aboutMissionTitle: 'Η αποστολή μας',
     aboutMissionParagraph: "Η αποστολή μας είναι απλή: να κάνουμε τη διαδικασία της προσφοράς δώρων χαρούμενη και αβίαστη. Αξιοποιούμε τη δύναμη της προηγμένης τεχνητής νοημοσύνης για να κατανοήσουμε τη μοναδική προσωπικότητα και τα ενδιαφέροντα του ατόμου για το οποίο ψωνίζετε. Αντί για γενικές συστάσεις, παρέχουμε εξατομικευμένες, δημιουργικές και στοχαστικές προτάσεις που πραγματικά έχουν απήχηση.",
-    documentTitle: 'GiftFinder AI - Βρες το τέλειο δώρο',
+    documentTitle: 'Podari AI - Βρες το τέλειο δώρο',
   },
   en: {
     // Header
@@ -78,9 +73,6 @@ export const i18n: any = {
     // SurveyStep
     other: 'Other',
     submit: 'Submit',
-    socialLinkPlaceholder: 'https://instagram.com/example',
-    findGifts: 'Find Gifts',
-    skip: 'Skip',
     // Loading Spinner
     loadingMessages: [
       "AI is crafting ideas...",
@@ -110,13 +102,11 @@ export const i18n: any = {
     errorTitle: 'An Error Occurred',
     tryAgain: 'Try Again',
     // Why
-    whyTitle: 'Why GiftFinder AI?',
+    whyTitle: 'Why Podari AI?',
     why1Title: 'True AI',
     why1Desc: 'Not just filters—our AI learns and generates new ideas by analyzing thousands of options.',
     why2Title: 'All Stores at Once',
     why2Desc: 'We find the best options on Public.cy, Stephanis, and Skroutz so you can compare.',
-    why3Title: 'Social Media Analysis',
-    why3Desc: 'Optional: paste a profile link for the AI to more accurately guess the person\'s interests.',
     why4Title: 'Wishlists & Profiles',
     why4Desc: 'Save ideas to wishlists and create profiles for loved ones so you don\'t forget important dates.',
     why5Title: 'Wide Scope',
@@ -134,14 +124,14 @@ export const i18n: any = {
     settingsLanguage: 'Language',
     footerHome: 'Home',
     footerAbout: 'About Us',
-    footerCopyright: `© ${new Date().getFullYear()} GiftFinder AI. All Rights Reserved.`,
+    footerCopyright: `© ${new Date().getFullYear()} Podari AI. All Rights Reserved.`,
     wishlistAria: 'Open wishlist',
     trendingTitle: 'Trending Gifts',
-    aboutTitle: 'About GiftFinder AI',
-    aboutParagraph1: "We believe that the perfect gift is more than just an item—it's a thoughtful expression of connection. In a world of endless options, finding that perfect gift can be overwhelming. That's why we created GiftFinder AI.",
+    aboutTitle: 'About Podari AI',
+    aboutParagraph1: "We believe that the perfect gift is more than just an item—it's a thoughtful expression of connection. In a world of endless options, finding that perfect gift can be overwhelming. That's why we created Podari AI.",
     aboutMissionTitle: 'Our Mission',
     aboutMissionParagraph: "Our mission is simple: to make gift-giving joyful and effortless. We leverage the power of advanced artificial intelligence to understand the unique personality and interests of the person you're shopping for. Instead of generic recommendations, we provide personalized, creative, and thoughtful suggestions that truly resonate.",
-    documentTitle: 'GiftFinder AI - Gift Finder',
+    documentTitle: 'Podari AI - Gift Finder',
   }
 };
 
@@ -205,12 +195,12 @@ export const SURVEY_STEPS: SurveyStepData[] = [
     question: t('Τι είδους άτομο είναι;', 'What is their personality like?'),
     type: OptionType.IMAGE,
     options: [
-        { label: t('Η ψυχή του πάρτι', 'Life of the party'), value: 'extrovert, social, life of the party', imageUrl: 'https://picsum.photos/seed/party1/400/300' },
-        { label: t('Σπιτόγατος/α', 'Homebody'), value: 'introvert, homebody, cozy', imageUrl: 'https://picsum.photos/seed/home1/400/300' },
-        { label: t('Δημιουργική ψυχή', 'Creative Soul'), value: 'creative, artistic, unique', imageUrl: 'https://picsum.photos/seed/art1/400/300' },
-        { label: t('Αθλητικός τύπος', 'Athlete'), value: 'active, sporty, outdoorsy', imageUrl: 'https://picsum.photos/seed/sport1/400/300' },
-        { label: t('Διανοούμενος', 'Intellectual'), value: 'intellectual, curious, loves to learn', imageUrl: 'https://picsum.photos/seed/book1/400/300' },
-        { label: t('Πραγματιστής', 'Pragmatist'), value: 'pragmatic, organized, minimalist', imageUrl: 'https://picsum.photos/seed/minimal1/400/300' },
+        { label: t('Η ψυχή του πάρτι', 'Life of the party'), value: 'extrovert, social, life of the party', imageUrl: 'https://m.media-amazon.com/images/I/71so4b2BbaL._AC_SL1500_.jpg' },
+        { label: t('Σπιτόγατος/α', 'Homebody'), value: 'introvert, homebody, cozy', imageUrl: 'https://m.media-amazon.com/images/I/815mPa2-LFL._AC_SL1500_.jpg' },
+        { label: t('Δημιουργική ψυχή', 'Creative Soul'), value: 'creative, artistic, unique', imageUrl: 'https://m.media-amazon.com/images/I/919pI59en8L._AC_SL1500_.jpg' },
+        { label: t('Αθλητικός τύπος', 'Athlete'), value: 'active, sporty, outdoorsy', imageUrl: 'https://m.media-amazon.com/images/I/71RT1-i32ML._AC_SL1500_.jpg' },
+        { label: t('Διανοούμενος', 'Intellectual'), value: 'intellectual, curious, loves to learn', imageUrl: 'https://m.media-amazon.com/images/I/7123-hLgJAL._AC_SL1500_.jpg' },
+        { label: t('Πραγματιστής', 'Pragmatist'), value: 'pragmatic, organized, minimalist', imageUrl: 'https://m.media-amazon.com/images/I/71nEE+oTlkL._AC_SL1500_.jpg' },
     ],
   },
   {
@@ -218,10 +208,10 @@ export const SURVEY_STEPS: SurveyStepData[] = [
     question: t('Διαλέξτε το σπίτι που θα του/της άρεσε περισσότερο', 'Choose the house they would love the most'),
     type: OptionType.IMAGE,
     options: [
-        { label: t('Μοντέρνο μινιμαλιστικό', 'Modern Minimalist'), value: 'modern, minimalist, clean lines', imageUrl: 'https://picsum.photos/seed/modernhouse/400/300' },
-        { label: t('Άνετο εξοχικό', 'Cozy Countryside'), value: 'cozy, rustic, countryside', imageUrl: 'https://picsum.photos/seed/cottage/400/300' },
-        { label: t('Μποέμ', 'Bohemian'), value: 'bohemian, eclectic, artistic', imageUrl: 'https://picsum.photos/seed/bohohouse/400/300' },
-        { label: t('Κλασική κομψότητα', 'Classic Elegance'), value: 'classic, elegant, traditional', imageUrl: 'https://picsum.photos/seed/classichouse/400/300' },
+        { label: t('Μοντέρνο μινιμαλιστικό', 'Modern Minimalist'), value: 'modern, minimalist, clean lines', imageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop' },
+        { label: t('Άνετο εξοχικό', 'Cozy Countryside'), value: 'cozy, rustic, countryside', imageUrl: 'https://images.unsplash.com/photo-1585333363398-38dd46093557?q=80&w=800&auto=format&fit=crop' },
+        { label: t('Μποέμ', 'Bohemian'), value: 'bohemian, eclectic, artistic', imageUrl: 'https://images.unsplash.com/photo-1558963242-243477f4e758?q=80&w=800&auto=format&fit=crop' },
+        { label: t('Κλασική κομψότητα', 'Classic Elegance'), value: 'classic, elegant, traditional', imageUrl: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?q=80&w=800&auto=format&fit=crop' },
     ]
   },
   {
@@ -229,12 +219,12 @@ export const SURVEY_STEPS: SurveyStepData[] = [
     question: t('Πώς του/της αρέσει να περνάει τον ελεύθερο του/της χρόνο;', 'How do they like to spend their free time?'),
     type: OptionType.IMAGE,
     options: [
-        { label: t('Ταξίδια & Περιπέτεια', 'Traveling & Adventure'), value: 'travel, adventure, hiking', imageUrl: 'https://picsum.photos/seed/travel/400/300' },
-        { label: t('Βραδιά με βιβλίο ή ταινία', 'A night with a book or movie'), value: 'reading, movies, relaxing at home', imageUrl: 'https://picsum.photos/seed/reading/400/300' },
-        { label: t('Μαγειρική & Γαστρονομία', 'Cooking & Gastronomy'), value: 'cooking, food, gastronomy', imageUrl: 'https://picsum.photos/seed/cooking/400/300' },
-        { label: t('Τεχνολογία & Gadgets', 'Tech & Gadgets'), value: 'technology, gadgets, gaming', imageUrl: 'https://picsum.photos/seed/tech/400/300' },
-        { label: t('Αθλητισμός', 'Playing Sports'), value: 'sports, fitness, gym', imageUrl: 'https://picsum.photos/seed/fitness/400/300' },
-        { label: t('Τέχνες & Χειροτεχνίες', 'Arts & Crafts'), value: 'crafts, painting, music', imageUrl: 'https://picsum.photos/seed/crafts/400/300' },
+        { label: t('Ταξίδια & Περιπέτεια', 'Traveling & Adventure'), value: 'travel, adventure, hiking', imageUrl: 'https://m.media-amazon.com/images/I/81OFfA5gLhL._AC_SL1500_.jpg' },
+        { label: t('Βραδιά με βιβλίο ή ταινία', 'A night with a book or movie'), value: 'reading, movies, relaxing at home', imageUrl: 'https://m.media-amazon.com/images/I/61MhS1g5G+L._AC_SL1000_.jpg' },
+        { label: t('Μαγειρική & Γαστρονομία', 'Cooking & Gastronomy'), value: 'cooking, food, gastronomy', imageUrl: 'https://m.media-amazon.com/images/I/71u-pukx-nL._AC_SL1500_.jpg' },
+        { label: t('Τεχνολογία & Gadgets', 'Tech & Gadgets'), value: 'technology, gadgets, gaming', imageUrl: 'https://m.media-amazon.com/images/I/711FVoG2TFL._AC_SL1500_.jpg' },
+        { label: t('Αθλητισμός', 'Playing Sports'), value: 'sports, fitness, gym', imageUrl: 'https://m.media-amazon.com/images/I/81p4LpY-iCL._AC_SL1500_.jpg' },
+        { label: t('Τέχνες & Χειροτεχνίες', 'Arts & Crafts'), value: 'crafts, painting, music', imageUrl: 'https://m.media-amazon.com/images/I/71LGs3q28SL._AC_SL1500_.jpg' },
     ]
   },
   {
@@ -250,11 +240,5 @@ export const SURVEY_STEPS: SurveyStepData[] = [
       { label: t('Εμπειρίες', 'Experiences'), value: 'experiences (e.g., tickets, trips)' },
       { label: t('Φαγητό & Ποτό', 'Food & Drink'), value: 'gourmet food and drink' },
     ]
-  },
-  {
-    id: 'socialLink',
-    question: t('Θέλετε η AI να αναλύσει τα social media του/της για καλύτερες προτάσεις; (προαιρετικό)', 'Want the AI to analyze their social media for better recommendations? (optional)'),
-    type: OptionType.TEXT, // This is a special input field handled in SurveyStep.tsx
-    options: [],
   },
 ];

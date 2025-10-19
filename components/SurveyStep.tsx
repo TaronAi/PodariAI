@@ -11,14 +11,10 @@ interface SurveyStepProps {
   t: {
     other: string;
     submit: string;
-    socialLinkPlaceholder: string;
-    findGifts: string;
-    skip: string;
   };
 }
 
 const SurveyStep: React.FC<SurveyStepProps> = ({ stepData, onNext, language, t }) => {
-  const [socialLink, setSocialLink] = useState('');
   const [isOtherInputVisible, setOtherInputVisible] = useState(false);
   const [otherValue, setOtherValue] = useState('');
 
@@ -49,39 +45,6 @@ const SurveyStep: React.FC<SurveyStepProps> = ({ stepData, onNext, language, t }
     setOtherInputVisible(true);
   };
 
-
-  if (stepData.id === 'socialLink') {
-    return (
-        <div className="flex flex-col items-center animate-fade-in">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-6 text-center">{stepData.question[langKey]}</h2>
-            <form onSubmit={(e) => {
-                e.preventDefault();
-                onNext({ id: stepData.id, value: socialLink || 'not provided' });
-            }} className="w-full max-w-md flex flex-col items-center">
-                <input
-                    type="text"
-                    value={socialLink}
-                    onChange={(e) => setSocialLink(e.target.value)}
-                    placeholder={t.socialLinkPlaceholder}
-                    className="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-purple-500 focus:outline-none transition"
-                />
-                <button
-                    type="submit"
-                    className="mt-6 w-full max-w-xs bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105 shadow-lg hover:shadow-purple-500/50"
-                >
-                    {t.findGifts} <i className="fas fa-search ml-2"></i>
-                </button>
-                 <button
-                    type="button"
-                    onClick={() => onNext({ id: stepData.id, value: 'not provided' })}
-                    className="mt-4 text-slate-400 hover:text-white transition"
-                >
-                    {t.skip}
-                </button>
-            </form>
-        </div>
-    );
-  }
 
   return (
     <div className="flex flex-col items-center animate-fade-in">

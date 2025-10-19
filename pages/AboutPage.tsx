@@ -12,8 +12,6 @@ interface AboutPageProps {
     why1Desc: string;
     why2Title: string;
     why2Desc: string;
-    why3Title: string;
-    why3Desc: string;
     why4Title: string;
     why4Desc: string;
     why5Title: string;

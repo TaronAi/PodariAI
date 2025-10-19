@@ -63,7 +63,7 @@ const Navbar: React.FC<NavbarProps> = ({ setCurrentPage, currentPage, t }) => {
             <button onClick={() => setCurrentPage('home')} className="flex-shrink-0 flex items-center space-x-2">
               <h1 className="text-2xl font-bold">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
-                  GiftFinder AI
+                  Podari AI
                 </span>
                 <i className="fas fa-gift ml-2 text-pink-500"></i>
               </h1>

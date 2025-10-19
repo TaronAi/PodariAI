@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface WhyPodariAIProps {
@@ -8,8 +7,6 @@ interface WhyPodariAIProps {
     why1Desc: string;
     why2Title: string;
     why2Desc: string;
-    why3Title: string;
-    why3Desc: string;
     why4Title: string;
     why4Desc: string;
     why5Title: string;
@@ -33,10 +30,6 @@ const WhyPodariAI: React.FC<WhyPodariAIProps> = ({ t }) => {
                 <div className="bg-slate-800 p-4 rounded-lg">
                     <h3 className="font-bold text-lg text-pink-400 mb-2"><i className="fas fa-store mr-2"></i>{t.why2Title}</h3>
                     <p className="text-slate-300 text-sm">{t.why2Desc}</p>
-                </div>
-                 <div className="bg-slate-800 p-4 rounded-lg">
-                    <h3 className="font-bold text-lg text-pink-400 mb-2"><i className="fas fa-users mr-2"></i>{t.why3Title}</h3>
-                    <p className="text-slate-300 text-sm">{t.why3Desc}</p>
                 </div>
                 <div className="bg-slate-800 p-4 rounded-lg">
                     <h3 className="font-bold text-lg text-pink-400 mb-2"><i className="fas fa-heart mr-2"></i>{t.why4Title}</h3>

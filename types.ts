@@ -13,7 +13,6 @@ export interface SurveyAnswers {
   style?: string;
   activity?: string;
   giftType?: string;
-  socialLink?: string;
 }
 
 export interface GiftSuggestion {
