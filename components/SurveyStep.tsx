@@ -1,12 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
-// Fix: Import `Language` type to correctly type the component props.
+// Corrected comments to accurately reflect the types being used.
 import { SurveyStepData, OptionType, SurveyAnswers, Language } from '../types';
 
 interface SurveyStepProps {
   stepData: SurveyStepData;
   onNext: (answer: { id: keyof SurveyAnswers; value: string }) => void;
-  // Fix: Widened the language prop type to `Language` to accept all supported languages.
+  // Prop type is correct, accepting 'cy' or 'en'.
   language: Language;
   t: {
     other: string;
@@ -22,7 +22,7 @@ const SurveyStep: React.FC<SurveyStepProps> = ({ stepData, onNext, language, t }
   const [isOtherInputVisible, setOtherInputVisible] = useState(false);
   const [otherValue, setOtherValue] = useState('');
 
-  // Fix: Added a language key with a fallback to 'en'. The `LocalizedString` type only has 'ru' and 'en' keys. This ensures that for any language other than Russian, the English text is used.
+  // This logic correctly selects 'cy' or 'en' to match the LocalizedString type.
   const langKey = language === 'cy' ? 'cy' : 'en';
 
   // Reset local state when the survey step (question) changes

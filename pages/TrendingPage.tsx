@@ -19,42 +19,42 @@ const trendingGifts: GiftSuggestion[] = [
         title: "Aerolatte Milk Frother, Original Steam Free with Stand",
         description: "An essential for any Cypriot household. Make the perfect ice-cold frappe at home with this top-rated frother.",
         price: "€25",
-        url: "https://www.amazon.co.uk/dp/B0001IXA40?tag=giftfindcy-21",
+        url: "https://www.amazon.co.uk/dp/B0001IXA40?tag=podariai-21",
         imageUrl: "https://m.media-amazon.com/images/I/611sF4a-t7L._AC_SL1500_.jpg"
     },
     {
         title: "Utopia Towels Large Beach Towel Cabana Stripe",
         description: "A large, absorbent, and stylish beach towel. Perfect for Cyprus's beautiful beaches.",
         price: "€40",
-        url: "https://www.amazon.co.uk/dp/B07595C953?tag=giftfindcy-21",
+        url: "https://www.amazon.co.uk/dp/B07595C953?tag=podariai-21",
         imageUrl: "https://m.media-amazon.com/images/I/9102gL3tJbL._AC_SL1500_.jpg"
     },
     {
         title: "Jaques of London Wooden Backgammon Set",
         description: "A beautiful 15-inch wooden backgammon set for long afternoons at the local 'kafeneio' or at home.",
         price: "€50",
-        url: "https://www.amazon.co.uk/dp/B0852HSX3V?tag=giftfindcy-21",
+        url: "https://www.amazon.co.uk/dp/B0852HSX3V?tag=podariai-21",
         imageUrl: "https://m.media-amazon.com/images/I/81kLIaT-E-L._AC_SL1500_.jpg"
     },
     {
         title: "Cyprus: A Culinary Journey by Georgina Hayden",
         description: "Learn to cook delicious Cypriot dishes at home with this authentic, highly-rated recipe book.",
         price: "€25",
-        url: "https://www.amazon.co.uk/dp/1529108233?tag=giftfindcy-21",
+        url: "https://www.amazon.co.uk/dp/1529108233?tag=podariai-21",
         imageUrl: "https://m.media-amazon.com/images/I/91T1wt9UlIL._AC_UF1000,1000_QL80_.jpg"
     },
     {
         title: "Ray-Ban New Wayfarer Sunglasses",
         description: "A stylish and essential accessory for the sunny Cypriot climate. Protect your eyes in style with a classic.",
         price: "€150",
-        url: "https://www.amazon.co.uk/dp/B001GNB24E?tag=giftfindcy-21",
+        url: "https://www.amazon.co.uk/dp/B001GNB24E?tag=podariai-21",
         imageUrl: "https://m.media-amazon.com/images/I/61a251tL83L._AC_SL1500_.jpg"
     },
     {
         title: "COSORI Air Fryer 5.5L",
         description: "A trending kitchen gadget for healthier and quicker cooking. Great for making Cypriot 'sheftalies' or fries.",
         price: "€90",
-        url: "https://www.amazon.co.uk/dp/B07N8HD9pr?tag=giftfindcy-21",
+        url: "https://www.amazon.co.uk/dp/B07N8HD9pr?tag=podariai-21",
         imageUrl: "https://m.media-amazon.com/images/I/71i-1tI33CL._AC_SL1500_.jpg"
     }
 ];
