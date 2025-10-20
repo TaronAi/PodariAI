@@ -16,9 +16,10 @@ interface HomePageProps {
   language: Language;
   region: RegionCode;
   t: any; // Using 'any' for simplicity, could be typed more strictly
+  resetApiKeyStatus: () => void;
 }
 
-const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language, region, t }) => {
+const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language, region, t, resetApiKeyStatus }) => {
   const [appState, setAppState] = useState<AppState>('survey');
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<SurveyAnswers>({});
@@ -44,13 +45,17 @@ const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language
       setAppState('opening');
     } catch (err) {
       if (err instanceof Error) {
+        // If the error indicates an invalid API key, prompt the user to select a new one.
+        if (err.message.includes("API key not valid") || err.message.includes("Requested entity was not found")) {
+            resetApiKeyStatus();
+        }
         setError(err.message);
       } else {
         setError("An unknown error occurred.");
       }
       setAppState('error');
     }
-  }, []);
+  }, [resetApiKeyStatus]);
 
   const fetchMoreGifts = useCallback(async () => {
     setIsFetchingMore(true);
@@ -60,11 +65,14 @@ const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language
       setGiftSuggestions(prev => [...prev, ...newSuggestions]);
     } catch (err) {
        console.error("Failed to fetch more gifts:", err);
+       if (err instanceof Error && (err.message.includes("API key not valid") || err.message.includes("Requested entity was not found"))) {
+           resetApiKeyStatus();
+       }
        // Optional: Show a small, non-disruptive error to the user
     } finally {
       setIsFetchingMore(false);
     }
-  }, [answers, language, region, giftSuggestions]);
+  }, [answers, language, region, giftSuggestions, resetApiKeyStatus]);
 
   const handleNextStep = (answer: { id: keyof SurveyAnswers; value: string }) => {
     const newAnswers = { ...answers, [answer.id]: answer.value };

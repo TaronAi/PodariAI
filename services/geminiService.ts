@@ -80,7 +80,11 @@ export const getGiftSuggestions = async (
 
   } catch (error) {
     console.error("Error during getGiftSuggestions:", error);
-    // Provide a more user-friendly error message that covers common issues.
-    throw new Error("Failed to get gift suggestions. Please check that your API key is correct and has been added to your environment variables. The AI service may also be temporarily unavailable.");
+    if (error instanceof Error) {
+      // Re-throw the original error to be handled by the calling component.
+      throw error;
+    }
+    // For cases where the thrown object is not an Error instance
+    throw new Error("An unknown error occurred while fetching gift suggestions.");
   }
 };
