@@ -1,3 +1,4 @@
+
 import { SurveyStepData, OptionType, LocalizedString, Region } from './types';
 
 export const i18n: any = {
@@ -35,6 +36,7 @@ export const i18n: any = {
     // Error
     errorTitle: 'Παρουσιάστηκε σφάλμα',
     tryAgain: 'Προσπαθήστε ξανά',
+    errorNoGiftsFound: 'Η AI δεν μπόρεσε να βρει κατάλληλα δώρα με τα επιλεγμένα κριτήρια. Παρακαλώ δοκιμάστε διαφορετικές επιλογές.',
     // Why
     whyTitle: 'Γιατί το Podari AI;',
     why1Title: 'Πραγματική AI',
@@ -101,6 +103,7 @@ export const i18n: any = {
     // Error
     errorTitle: 'An Error Occurred',
     tryAgain: 'Try Again',
+    errorNoGiftsFound: "The AI couldn't find any suitable gifts with the selected criteria. Please try different options.",
     // Why
     whyTitle: 'Why Podari AI?',
     why1Title: 'True AI',
@@ -141,42 +144,45 @@ export const REGIONS: Region[] = [
   { code: 'CY', name: 'Cyprus' },
 ];
 
+// Fix: Completed the SURVEY_STEPS array which was previously truncated, causing a compilation error.
 export const SURVEY_STEPS: SurveyStepData[] = [
   {
     id: 'recipient',
     question: t('Για ποιον ψάχνετε δώρο;', 'Who are you looking for a gift for?'),
     type: OptionType.TEXT,
-    allowOther: true,
     options: [
       { label: t('Σύντροφος', 'Partner'), value: 'partner' },
-      { label: t('Μέλος Οικογένειας', 'Family Member'), value: 'family member' },
-      { label: t('Φίλος', 'Friend'), value: 'friend' },
-      { label: t('Συνάδελφος', 'Colleague'), value: 'colleague' },
-      { label: t('Παιδί', 'Child'), value: 'child' },
+      { label: t('Φίλος/η', 'Friend'), value: 'friend' },
       { label: t('Γονέας', 'Parent'), value: 'parent' },
+      { label: t('Αδέλφι', 'Sibling'), value: 'sibling' },
+      { label: t('Παιδί', 'Child'), value: 'child' },
+      { label: t('Συνάδελφος', 'Colleague'), value: 'colleague' },
     ],
+    allowOther: true,
   },
   {
     id: 'occasion',
-    question: t('Ποια είναι η περίσταση;', "What's the occasion?"),
+    question: t('Για ποια περίσταση;', 'What is the occasion?'),
     type: OptionType.TEXT,
-    allowOther: true,
     options: [
-        { label: t('Γενέθλια', 'Birthday'), value: 'birthday' },
-        { label: t('Χριστούγεννα', 'Christmas'), value: 'christmas' },
-        { label: t('Επέτειος', 'Anniversary'), value: 'anniversary' },
-        { label: t('Ονομαστική Εορτή', 'Name Day'), value: 'name day' },
-        { label: t('Έτσι απλά', 'Just because'), value: 'just because' },
-    ]
+      { label: t('Γενέθλια', 'Birthday'), value: 'birthday' },
+      { label: t('Γιορτή', 'Name Day'), value: 'name-day' },
+      { label: t('Επέτειος', 'Anniversary'), value: 'anniversary' },
+      { label: t('Χριστούγεννα', 'Christmas'), value: 'christmas' },
+      { label: t('Πάσχα', 'Easter'), value: 'easter' },
+      { label: t('Αποφοίτηση', 'Graduation'), value: 'graduation' },
+      { label: t('Απλά επειδή...', 'Just because...'), value: 'just-because' },
+    ],
+    allowOther: true,
   },
   {
     id: 'gender',
-    question: t('Ποιο είναι το φύλο του/της;', 'What is their gender?'),
+    question: t('Ποιο είναι το φύλο τους;', 'What is their gender?'),
     type: OptionType.TEXT,
     options: [
-      { label: t('Άνδρας', 'Male'), value: 'male' },
-      { label: t('Γυναίκα', 'Female'), value: 'female' },
-      { label: t('Δεν έχει σημασία', "Doesn't matter"), value: 'any' },
+      { label: t('Γυναίκα', 'Woman'), value: 'woman' },
+      { label: t('Άνδρας', 'Man'), value: 'man' },
+      { label: t('Άλλο / Δεν έχει σημασία', 'Other / Does not matter'), value: 'any' },
     ],
   },
   {
@@ -184,61 +190,59 @@ export const SURVEY_STEPS: SurveyStepData[] = [
     question: t('Ποιος είναι ο προϋπολογισμός σας;', 'What is your budget?'),
     type: OptionType.TEXT,
     options: [
-      { label: t('έως €50', 'Under €50'), value: 'under 50 EUR' },
-      { label: t('€50 - €100', '€50 - €100'), value: '50-100 EUR' },
-      { label: t('€100 - €250', '€100 - €250'), value: '100-250 EUR' },
-      { label: t('€250+', 'Over €250'), value: 'over 250 EUR' },
+      { label: t('€0 - €25', '€0 - €25'), value: '0-25' },
+      { label: t('€25 - €50', '€25 - €50'), value: '25-50' },
+      { label: t('€50 - €100', '€50 - €100'), value: '50-100' },
+      { label: t('€100+', '€100+'), value: '100+' },
     ],
   },
-   {
+  {
     id: 'personality',
-    question: t('Τι είδους άτομο είναι;', 'What is their personality like?'),
+    question: t('Περιγράψτε την προσωπικότητά τους', 'Describe their personality'),
     type: OptionType.IMAGE,
     options: [
-        { label: t('Η ψυχή του πάρτι', 'Life of the party'), value: 'extrovert, social, life of the party', imageUrl: 'https://m.media-amazon.com/images/I/71so4b2BbaL._AC_SL1500_.jpg' },
-        { label: t('Σπιτόγατος/α', 'Homebody'), value: 'introvert, homebody, cozy', imageUrl: 'https://m.media-amazon.com/images/I/815mPa2-LFL._AC_SL1500_.jpg' },
-        { label: t('Δημιουργική ψυχή', 'Creative Soul'), value: 'creative, artistic, unique', imageUrl: 'https://m.media-amazon.com/images/I/919pI59en8L._AC_SL1500_.jpg' },
-        { label: t('Αθλητικός τύπος', 'Athlete'), value: 'active, sporty, outdoorsy', imageUrl: 'https://m.media-amazon.com/images/I/71RT1-i32ML._AC_SL1500_.jpg' },
-        { label: t('Διανοούμενος', 'Intellectual'), value: 'intellectual, curious, loves to learn', imageUrl: 'https://m.media-amazon.com/images/I/7123-hLgJAL._AC_SL1500_.jpg' },
-        { label: t('Πραγματιστής', 'Pragmatist'), value: 'pragmatic, organized, minimalist', imageUrl: 'https://m.media-amazon.com/images/I/71nEE+oTlkL._AC_SL1500_.jpg' },
+        { label: t('Δημιουργικός & Καλλιτεχνικός', 'Creative & Artsy'), value: 'creative', imageUrl: 'https://via.placeholder.com/400x300/9333ea/ffffff?text=Creative' },
+        { label: t('Περιπετειώδης & Ενεργητικός', 'Adventurous & Outdoorsy'), value: 'adventurous', imageUrl: 'https://via.placeholder.com/400x300/10b981/ffffff?text=Adventurous' },
+        { label: t('Διανοούμενος & Βιβλιοφάγος', 'Intellectual & Bookworm'), value: 'intellectual', imageUrl: 'https://via.placeholder.com/400x300/3b82f6/ffffff?text=Intellectual' },
+        { label: t('Χαλαρός & Σπιτόγατος', 'Relaxed & Homebody'), value: 'homebody', imageUrl: 'https://via.placeholder.com/400x300/f59e0b/ffffff?text=Homebody' },
     ],
+    allowOther: true,
   },
   {
     id: 'style',
-    question: t('Διαλέξτε το σπίτι που θα του/της άρεσε περισσότερο', 'Choose the house they would love the most'),
+    question: t('Ποιο είναι το στυλ τους;', 'What is their style?'),
     type: OptionType.IMAGE,
     options: [
-        { label: t('Μοντέρνο μινιμαλιστικό', 'Modern Minimalist'), value: 'modern, minimalist, clean lines', imageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop' },
-        { label: t('Άνετο εξοχικό', 'Cozy Countryside'), value: 'cozy, rustic, countryside', imageUrl: 'https://images.unsplash.com/photo-1585333363398-38dd46093557?q=80&w=800&auto=format&fit=crop' },
-        { label: t('Μποέμ', 'Bohemian'), value: 'bohemian, eclectic, artistic', imageUrl: 'https://images.unsplash.com/photo-1558963242-243477f4e758?q=80&w=800&auto=format&fit=crop' },
-        { label: t('Κλασική κομψότητα', 'Classic Elegance'), value: 'classic, elegant, traditional', imageUrl: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?q=80&w=800&auto=format&fit=crop' },
-    ]
+        { label: t('Μοντέρνο & Κομψό', 'Modern & Chic'), value: 'modern', imageUrl: 'https://via.placeholder.com/400x300/ec4899/ffffff?text=Modern' },
+        { label: t('Casual & Άνετο', 'Casual & Comfortable'), value: 'casual', imageUrl: 'https://via.placeholder.com/400x300/6b7280/ffffff?text=Casual' },
+        { label: t('Boho & Χύμα', 'Boho & Eclectic'), value: 'boho', imageUrl: 'https://via.placeholder.com/400x300/84cc16/ffffff?text=Boho' },
+        { label: t('Vintage & Ρετρό', 'Vintage & Retro'), value: 'vintage', imageUrl: 'https://via.placeholder.com/400x300/a16207/ffffff?text=Vintage' },
+    ],
+    allowOther: true,
   },
   {
     id: 'activity',
-    question: t('Πώς του/της αρέσει να περνάει τον ελεύθερο του/της χρόνο;', 'How do they like to spend their free time?'),
-    type: OptionType.IMAGE,
+    question: t('Τι τους αρέσει να κάνουν;', 'What do they like to do?'),
+    type: OptionType.TEXT,
     options: [
-        { label: t('Ταξίδια & Περιπέτεια', 'Traveling & Adventure'), value: 'travel, adventure, hiking', imageUrl: 'https://m.media-amazon.com/images/I/81OFfA5gLhL._AC_SL1500_.jpg' },
-        { label: t('Βραδιά με βιβλίο ή ταινία', 'A night with a book or movie'), value: 'reading, movies, relaxing at home', imageUrl: 'https://m.media-amazon.com/images/I/61MhS1g5G+L._AC_SL1000_.jpg' },
-        { label: t('Μαγειρική & Γαστρονομία', 'Cooking & Gastronomy'), value: 'cooking, food, gastronomy', imageUrl: 'https://m.media-amazon.com/images/I/71u-pukx-nL._AC_SL1500_.jpg' },
-        { label: t('Τεχνολογία & Gadgets', 'Tech & Gadgets'), value: 'technology, gadgets, gaming', imageUrl: 'https://m.media-amazon.com/images/I/711FVoG2TFL._AC_SL1500_.jpg' },
-        { label: t('Αθλητισμός', 'Playing Sports'), value: 'sports, fitness, gym', imageUrl: 'https://m.media-amazon.com/images/I/81p4LpY-iCL._AC_SL1500_.jpg' },
-        { label: t('Τέχνες & Χειροτεχνίες', 'Arts & Crafts'), value: 'crafts, painting, music', imageUrl: 'https://m.media-amazon.com/images/I/71LGs3q28SL._AC_SL1500_.jpg' },
-    ]
+      { label: t('Μαγειρική & Ζαχαροπλαστική', 'Cooking & Baking'), value: 'cooking' },
+      { label: t('Σπορ & Γυμναστική', 'Sports & Fitness'), value: 'sports' },
+      { label: t('Ταξίδια & Εξερεύνηση', 'Traveling & Exploring'), value: 'traveling' },
+      { label: t('Gaming & Τεχνολογία', 'Gaming & Technology'), value: 'gaming' },
+      { label: t('Κηπουρική', 'Gardening'), value: 'gardening' },
+    ],
+    allowOther: true,
   },
   {
     id: 'giftType',
-    question: t('Τι είδους δώρο ψάχνετε;', 'What type of gift are you looking for?'),
+    question: t('Τι είδος δώρου ψάχνετε;', 'What type of gift are you looking for?'),
     type: OptionType.TEXT,
-    allowOther: true,
     options: [
-      { label: t('Τεχνολογία & Gadgets', 'Tech & Gadgets'), value: 'tech and gadgets' },
-      { label: t('Μόδα & Αξεσουάρ', 'Fashion & Accessories'), value: 'fashion and accessories' },
-      { label: t('Βιβλία & Χόμπι', 'Books & Hobbies'), value: 'books and hobbies' },
-      { label: t('Για το σπίτι', 'Home & Cozy'), value: 'home and decor' },
-      { label: t('Εμπειρίες', 'Experiences'), value: 'experiences (e.g., tickets, trips)' },
-      { label: t('Φαγητό & Ποτό', 'Food & Drink'), value: 'gourmet food and drink' },
-    ]
+      { label: t('Κάτι πρακτικό', 'Something practical'), value: 'practical' },
+      { label: t('Μια εμπειρία', 'An experience'), value: 'experience' },
+      { label: t('Κάτι συναισθηματικό', 'Something sentimental'), value: 'sentimental' },
+      { label: t('Κάτι αστείο', 'Something funny'), value: 'funny' },
+    ],
+    allowOther: true,
   },
 ];

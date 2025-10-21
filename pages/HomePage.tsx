@@ -4,7 +4,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import GiftResults from '../components/GiftResults';
 import GiftOpeningAnimation from '../components/GiftOpeningAnimation';
 import WhyPodariAI from '../components/WhyPodariAI';
-import { SURVEY_STEPS, REGIONS } from '../constants';
+import { SURVEY_STEPS } from '../constants';
 import { getGiftSuggestions } from '../services/geminiService';
 import { SurveyAnswers, GiftSuggestion, Language, RegionCode } from '../types';
 
@@ -34,12 +34,16 @@ const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language
     setGiftSuggestions([]);
   };
 
-  const fetchGifts = useCallback(async (finalAnswers: SurveyAnswers, lang: Language, reg: RegionCode) => {
+  const fetchGifts = useCallback(async (finalAnswers: SurveyAnswers) => {
     setAppState('loading');
     setError(null);
-    const regionName = REGIONS.find(r => r.code === reg)?.name || 'Cyprus';
     try {
-      const suggestions = await getGiftSuggestions(finalAnswers, lang, regionName);
+      const suggestions = await getGiftSuggestions(finalAnswers, language);
+      if (!suggestions || suggestions.length === 0) {
+        setError(t.errorNoGiftsFound);
+        setAppState('error');
+        return;
+      }
       setGiftSuggestions(suggestions);
       setAppState('opening');
     } catch (err) {
@@ -50,21 +54,25 @@ const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language
       }
       setAppState('error');
     }
-  }, []);
+  }, [language, t]);
 
   const fetchMoreGifts = useCallback(async () => {
     setIsFetchingMore(true);
-    const regionName = REGIONS.find(r => r.code === region)?.name || 'Cyprus';
     try {
-      const newSuggestions = await getGiftSuggestions(answers, language, regionName, giftSuggestions);
-      setGiftSuggestions(prev => [...prev, ...newSuggestions]);
+      const newSuggestions = await getGiftSuggestions(answers, language, giftSuggestions);
+      if (newSuggestions && newSuggestions.length > 0) {
+        setGiftSuggestions(prev => [...prev, ...newSuggestions]);
+      } else {
+        // Optional: Implement a toast or a small message indicating no more gifts were found.
+        console.log("No new gifts found.");
+      }
     } catch (err) {
        console.error("Failed to fetch more gifts:", err);
        // Optional: Show a small, non-disruptive error to the user
     } finally {
       setIsFetchingMore(false);
     }
-  }, [answers, language, region, giftSuggestions]);
+  }, [answers, language, giftSuggestions]);
 
   const handleNextStep = (answer: { id: keyof SurveyAnswers; value: string }) => {
     const newAnswers = { ...answers, [answer.id]: answer.value };
@@ -73,7 +81,7 @@ const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language
     if (currentStep < SURVEY_STEPS.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      fetchGifts(newAnswers, language, region);
+      fetchGifts(newAnswers);
     }
   };
 
