@@ -23,32 +23,28 @@ export const getGiftSuggestions = async (
       : '';
 
     const prompt = `
-      You are an expert gift-finding API for Cyprus. Your ONLY task is to return a valid JSON array of objects. Do not write any other text or explanations.
+      You are an expert gift-finding API for Cyprus. Your ONLY task is to return a valid JSON array of objects. Do not write any other text, markdown, or explanations.
 
-      Your goal is to find between 5 and 10 real-world gift ideas based on the user's preferences.
+      Your goal is to find between 5 and 10 real-world gift ideas based on the user's preferences. You MUST ALWAYS return at least 5 suggestions, even if they are a broader match.
       
       **CRITICAL INSTRUCTIONS:**
       1.  **SEARCH EXCLUSIVELY ON "cyprusemall.com.cy"**. You MUST use your search tool and restrict it to this domain.
       2.  **ALL URLs MUST BE VALID** and point to a product page on "https://www.cyprusemall.com.cy".
-      3.  **The response language must be ${fullLanguageName}.**
-      4.  **The output MUST be a single, valid JSON array of objects.** No markdown, no introductory text. Just the array.
+      3.  **The response language for text fields ("title", "description") must be ${fullLanguageName}.**
+      4.  **The output MUST be a single, valid JSON array of objects.** Just the array.
       
       ${existingSuggestionsConstraint}
       
-      **USER PREFERENCES:**
+      **USER PREFERENCES (use these as a guide):**
       - Gift for: ${answers.recipient || 'any'}
       - Occasion: ${answers.occasion || 'any'}
       - Gender: ${answers.gender || 'any'}
       - Budget: ${answers.budget || 'any'}
-      - Personality: ${answers.personality || 'any'}
-      - Style: ${answers.style || 'any'}
-      - Activity: ${answers.activity || 'any'}
-      - Gift Type: ${answers.giftType || 'any'}
 
       **HOW TO FIND GIFTS:**
-      1.  Analyze the user preferences to understand the request.
-      2.  Formulate search queries like "site:cyprusemall.com.cy ${answers.activity} gift for ${answers.gender}" or "site:cyprusemall.com.cy ${answers.occasion} ${answers.recipient}".
-      3.  Browse the search results to find suitable products.
+      1.  Analyze the user preferences as a guide for your search.
+      2.  Use your search tool to find suitable products on "site:cyprusemall.com.cy". Be creative with search terms based on the preferences.
+      3.  If you cannot find perfect matches, find popular and well-regarded items from the website that could be appropriate for the occasion.
       4.  For each product, extract the exact title, a compelling description, the price as a string (e.g., "€49.99"), the full product URL, and a direct image URL.
       5.  Format the result into the JSON structure below.
 

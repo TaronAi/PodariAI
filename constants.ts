@@ -1,4 +1,3 @@
-
 import { SurveyStepData, OptionType, LocalizedString, Region } from './types';
 
 export const i18n: any = {
@@ -144,7 +143,6 @@ export const REGIONS: Region[] = [
   { code: 'CY', name: 'Cyprus' },
 ];
 
-// Fix: Completed the SURVEY_STEPS array which was previously truncated, causing a compilation error.
 export const SURVEY_STEPS: SurveyStepData[] = [
   {
     id: 'recipient',
@@ -195,54 +193,5 @@ export const SURVEY_STEPS: SurveyStepData[] = [
       { label: t('€50 - €100', '€50 - €100'), value: '50-100' },
       { label: t('€100+', '€100+'), value: '100+' },
     ],
-  },
-  {
-    id: 'personality',
-    question: t('Περιγράψτε την προσωπικότητά τους', 'Describe their personality'),
-    type: OptionType.IMAGE,
-    options: [
-        { label: t('Δημιουργικός & Καλλιτεχνικός', 'Creative & Artsy'), value: 'creative', imageUrl: 'https://via.placeholder.com/400x300/9333ea/ffffff?text=Creative' },
-        { label: t('Περιπετειώδης & Ενεργητικός', 'Adventurous & Outdoorsy'), value: 'adventurous', imageUrl: 'https://via.placeholder.com/400x300/10b981/ffffff?text=Adventurous' },
-        { label: t('Διανοούμενος & Βιβλιοφάγος', 'Intellectual & Bookworm'), value: 'intellectual', imageUrl: 'https://via.placeholder.com/400x300/3b82f6/ffffff?text=Intellectual' },
-        { label: t('Χαλαρός & Σπιτόγατος', 'Relaxed & Homebody'), value: 'homebody', imageUrl: 'https://via.placeholder.com/400x300/f59e0b/ffffff?text=Homebody' },
-    ],
-    allowOther: true,
-  },
-  {
-    id: 'style',
-    question: t('Ποιο είναι το στυλ τους;', 'What is their style?'),
-    type: OptionType.IMAGE,
-    options: [
-        { label: t('Μοντέρνο & Κομψό', 'Modern & Chic'), value: 'modern', imageUrl: 'https://via.placeholder.com/400x300/ec4899/ffffff?text=Modern' },
-        { label: t('Casual & Άνετο', 'Casual & Comfortable'), value: 'casual', imageUrl: 'https://via.placeholder.com/400x300/6b7280/ffffff?text=Casual' },
-        { label: t('Boho & Χύμα', 'Boho & Eclectic'), value: 'boho', imageUrl: 'https://via.placeholder.com/400x300/84cc16/ffffff?text=Boho' },
-        { label: t('Vintage & Ρετρό', 'Vintage & Retro'), value: 'vintage', imageUrl: 'https://via.placeholder.com/400x300/a16207/ffffff?text=Vintage' },
-    ],
-    allowOther: true,
-  },
-  {
-    id: 'activity',
-    question: t('Τι τους αρέσει να κάνουν;', 'What do they like to do?'),
-    type: OptionType.TEXT,
-    options: [
-      { label: t('Μαγειρική & Ζαχαροπλαστική', 'Cooking & Baking'), value: 'cooking' },
-      { label: t('Σπορ & Γυμναστική', 'Sports & Fitness'), value: 'sports' },
-      { label: t('Ταξίδια & Εξερεύνηση', 'Traveling & Exploring'), value: 'traveling' },
-      { label: t('Gaming & Τεχνολογία', 'Gaming & Technology'), value: 'gaming' },
-      { label: t('Κηπουρική', 'Gardening'), value: 'gardening' },
-    ],
-    allowOther: true,
-  },
-  {
-    id: 'giftType',
-    question: t('Τι είδος δώρου ψάχνετε;', 'What type of gift are you looking for?'),
-    type: OptionType.TEXT,
-    options: [
-      { label: t('Κάτι πρακτικό', 'Something practical'), value: 'practical' },
-      { label: t('Μια εμπειρία', 'An experience'), value: 'experience' },
-      { label: t('Κάτι συναισθηματικό', 'Something sentimental'), value: 'sentimental' },
-      { label: t('Κάτι αστείο', 'Something funny'), value: 'funny' },
-    ],
-    allowOther: true,
   },
 ];
