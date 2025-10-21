@@ -8,7 +8,7 @@ interface TrendingPageProps {
     whereToBuy: string;
     addToWishlist: string;
     removeFromWishlist: string;
-    buyOnAmazon: string;
+    viewProduct: string;
   };
   onAddToWishlist: (gift: GiftSuggestion) => void;
   wishlist: GiftSuggestion[];
@@ -16,46 +16,52 @@ interface TrendingPageProps {
 
 const trendingGifts: GiftSuggestion[] = [
     {
-        title: "Aerolatte Milk Frother, Original Steam Free with Stand",
+        title: "VonShef Electric Milk Frother",
         description: "An essential for any Cypriot household. Make the perfect ice-cold frappe at home with this top-rated frother.",
-        price: "€25",
-        url: "https://www.amazon.co.uk/dp/B0001IXA40?tag=podariai-21",
-        imageUrl: "https://m.media-amazon.com/images/I/611sF4a-t7L._AC_SL1500_.jpg"
+        price: "€30",
+        url: "https://www.cyprusemall.com.cy/product/vonshef-milk-frother/",
+        imageUrl: "https://www.cyprusemall.com.cy/wp-content/uploads/2023/10/71N1G4P3BDL._AC_SL1500_-300x300.jpg",
+        seller: "Kitchen Paradise"
     },
     {
-        title: "Utopia Towels Large Beach Towel Cabana Stripe",
-        description: "A large, absorbent, and stylish beach towel. Perfect for Cyprus's beautiful beaches.",
-        price: "€40",
-        url: "https://www.amazon.co.uk/dp/B07595C953?tag=podariai-21",
-        imageUrl: "https://m.media-amazon.com/images/I/9102gL3tJbL._AC_SL1500_.jpg"
+        title: "Peshtemal Stripe Beach Towel",
+        description: "A large, absorbent, and stylish Turkish-style beach towel. Perfect for Cyprus's beautiful beaches.",
+        price: "€22",
+        url: "https://www.cyprusemall.com.cy/product/peshtemal-stripe-beach-towel-blue/",
+        imageUrl: "https://www.cyprusemall.com.cy/wp-content/uploads/2023/07/71b-dIqA6L._AC_SL1500_-300x300.jpg",
+        seller: "Summer Essentials"
     },
     {
-        title: "Jaques of London Wooden Backgammon Set",
-        description: "A beautiful 15-inch wooden backgammon set for long afternoons at the local 'kafeneio' or at home.",
-        price: "€50",
-        url: "https://www.amazon.co.uk/dp/B0852HSX3V?tag=podariai-21",
-        imageUrl: "https://m.media-amazon.com/images/I/81kLIaT-E-L._AC_SL1500_.jpg"
+        title: "Deluxe Wooden Backgammon Set",
+        description: "A beautiful large wooden backgammon set for long afternoons at the local 'kafeneio' or at home.",
+        price: "€45",
+        url: "https://www.cyprusemall.com.cy/product/deluxe-backgammon-set-large/",
+        imageUrl: "https://www.cyprusemall.com.cy/wp-content/uploads/2023/11/61Z6Q3Z3J7L._AC_SL1001_-300x300.jpg",
+        seller: "Hobby Games CY"
     },
     {
-        title: "Cyprus: A Culinary Journey by Georgina Hayden",
-        description: "Learn to cook delicious Cypriot dishes at home with this authentic, highly-rated recipe book.",
-        price: "€25",
-        url: "https://www.amazon.co.uk/dp/1529108233?tag=podariai-21",
-        imageUrl: "https://m.media-amazon.com/images/I/91T1wt9UlIL._AC_UF1000,1000_QL80_.jpg"
+        title: "BBQ Grill Tool Set (18pcs)",
+        description: "Everything you need for the perfect souvla. This stainless steel set is a must-have for any grill master.",
+        price: "€55",
+        url: "https://www.cyprusemall.com.cy/product/bbq-tool-set-18pcs/",
+        imageUrl: "https://www.cyprusemall.com.cy/wp-content/uploads/2023/07/81T6-i90l2L._AC_SL1500_-300x300.jpg",
+        seller: "Super Home Center"
     },
     {
-        title: "Ray-Ban New Wayfarer Sunglasses",
-        description: "A stylish and essential accessory for the sunny Cypriot climate. Protect your eyes in style with a classic.",
-        price: "€150",
-        url: "https://www.amazon.co.uk/dp/B001GNB24E?tag=podariai-21",
-        imageUrl: "https://m.media-amazon.com/images/I/61a251tL83L._AC_SL1500_.jpg"
+        title: "Unisex Classic Wayfarer Sunglasses",
+        description: "A stylish and essential accessory for the sunny Cypriot climate. Protect your eyes in style with a classic design.",
+        price: "€18",
+        url: "https://www.cyprusemall.com.cy/product/unisex-wayfarer-sunglasses/",
+        imageUrl: "https://www.cyprusemall.com.cy/wp-content/uploads/2023/07/61Yd2i7V-SL._AC_UY625_-300x300.jpg",
+        seller: "Fashion Direct"
     },
     {
-        title: "COSORI Air Fryer 5.5L",
+        title: "Nedis Hot Air Fryer 4.6L",
         description: "A trending kitchen gadget for healthier and quicker cooking. Great for making Cypriot 'sheftalies' or fries.",
-        price: "€90",
-        url: "https://www.amazon.co.uk/dp/B07N8HD9pr?tag=podariai-21",
-        imageUrl: "https://m.media-amazon.com/images/I/71i-1tI33CL._AC_SL1500_.jpg"
+        price: "€85",
+        url: "https://www.cyprusemall.com.cy/product/nedis-hot-air-fryer-4-6l/",
+        imageUrl: "https://www.cyprusemall.com.cy/wp-content/uploads/2024/02/KAAF250EBK_P-300x300.jpg",
+        seller: "Electroline"
     }
 ];
 
@@ -80,7 +86,7 @@ const TrendingPage: React.FC<TrendingPageProps> = ({ t, onAddToWishlist, wishlis
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <h3 className="absolute bottom-4 left-4 text-xl font-bold text-white pr-4">{gift.title}</h3>
+                <h3 className="absolute bottom-4 left-4 text-lg sm:text-xl font-bold text-white pr-4">{gift.title}</h3>
                  <button
                     onClick={() => onAddToWishlist(gift)}
                     className={`absolute top-4 right-4 z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 transform group-hover:opacity-100 ${
@@ -95,10 +101,10 @@ const TrendingPage: React.FC<TrendingPageProps> = ({ t, onAddToWishlist, wishlis
                 <p className="text-slate-300 text-sm flex-grow mb-4">{gift.description}</p>
                 <p className="text-xl sm:text-2xl font-semibold text-white mt-auto mb-4">{gift.price}</p>
                 <div className="border-t border-slate-700 pt-4">
-                  <p className="text-sm font-semibold text-slate-400 mb-3">{t.whereToBuy}:</p>
-                  <div className="flex flex-col space-y-2 text-sm">
-                    <a href={gift.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-slate-900 bg-yellow-400 hover:bg-yellow-500 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
-                      <i className="fab fa-amazon mr-2"></i>{t.buyOnAmazon}
+                  {gift.seller && <p className="text-sm font-semibold text-slate-400 mb-3">{t.whereToBuy}: <span className="text-white font-bold">{gift.seller}</span></p>}
+                  <div className="flex flex-col space-y-2 text-sm mt-3">
+                    <a href={gift.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-white bg-purple-600 hover:bg-purple-700 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
+                      <i className="fas fa-shopping-cart mr-2"></i>{t.viewProduct}
                     </a>
                   </div>
                 </div>

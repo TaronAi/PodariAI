@@ -11,7 +11,7 @@ interface GiftResultsProps {
   t: {
     resultsTitle: string;
     whereToBuy: string;
-    buyOnAmazon: string;
+    viewProduct: string;
     startOver: string;
     showMoreGifts: string;
     loadingMore: string;
@@ -57,10 +57,10 @@ const GiftResults: React.FC<GiftResultsProps> = ({ suggestions, onReset, onAddTo
                 <p className="text-slate-300 text-sm flex-grow mb-4">{gift.description}</p>
                 <p className="text-xl sm:text-2xl font-semibold text-white mt-auto mb-4">{gift.price}</p>
                 <div className="border-t border-slate-700 pt-4">
-                  <p className="text-sm font-semibold text-slate-400 mb-3">{t.whereToBuy}:</p>
-                  <div className="flex flex-col space-y-2 text-sm">
-                    <a href={gift.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-slate-900 bg-yellow-400 hover:bg-yellow-500 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
-                      <i className="fab fa-amazon mr-2"></i>{t.buyOnAmazon}
+                  {gift.seller && <p className="text-sm font-semibold text-slate-400 mb-3">{t.whereToBuy}: <span className="text-white font-bold">{gift.seller}</span></p>}
+                  <div className="flex flex-col space-y-2 text-sm mt-3">
+                    <a href={gift.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center font-bold text-white bg-purple-600 hover:bg-purple-700 rounded-md py-2 px-4 transition-all duration-200 transform hover:scale-105">
+                      <i className="fas fa-shopping-cart mr-2"></i>{t.viewProduct}
                     </a>
                   </div>
                 </div>

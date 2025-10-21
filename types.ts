@@ -21,6 +21,7 @@ export interface GiftSuggestion {
   price: string;
   url: string;
   imageUrl: string;
+  seller?: string;
 }
 
 export enum OptionType {
