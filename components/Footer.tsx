@@ -19,7 +19,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage, t }) => {
             <a href="https://t.me/+bxeuzzF7uMVkNThi" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-pink-500 transition-colors">
                 <i className="fab fa-telegram-plane"></i>
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-pink-500 transition-colors">
+            <a href="https://www.instagram.com/poda.riai/" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-pink-500 transition-colors">
                 <i className="fab fa-instagram"></i>
             </a>
         </div>

@@ -1,7 +1,8 @@
 
 export interface LocalizedString {
-  cy: string;
   en: string;
+  ru: string;
+  hy: string;
 }
 
 export interface SurveyAnswers {
@@ -44,8 +45,8 @@ export interface SurveyStepData {
 }
 
 // Updated Types for Settings
-export type RegionCode = 'CY';
-export type Language = 'cy' | 'en';
+export type RegionCode = 'AM';
+export type Language = 'en' | 'ru' | 'hy';
 
 export interface Region {
   code: RegionCode;

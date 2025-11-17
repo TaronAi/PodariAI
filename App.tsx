@@ -16,7 +16,7 @@ const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
   const [wishlist, setWishlist] = useState<GiftSuggestion[]>([]);
   
-  const [region, setRegion] = useState<RegionCode>('CY');
+  const [region, setRegion] = useState<RegionCode>('AM');
   const [language, setLanguage] = useState<Language>('en');
 
   const t = i18n[language] || i18n['en'];

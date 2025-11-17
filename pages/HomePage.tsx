@@ -18,6 +18,35 @@ interface HomePageProps {
   t: any; // Using 'any' for simplicity, could be typed more strictly
 }
 
+// Helper function to validate if a gift's price is within the selected budget
+const isPriceInBudget = (priceStr: string, budgetStr?: string): boolean => {
+  if (!budgetStr) return true; // No budget selected, so all prices are valid.
+
+  // 1. Parse the price string (e.g., "5,900 ֏") into a number.
+  // This regex removes currency symbols, spaces, and thousand separators.
+  const price = parseFloat(priceStr.replace(/[^0-9.]/g, ''));
+  if (isNaN(price)) {
+    return false; // If price can't be parsed, exclude the item.
+  }
+
+  // 2. Parse the budget string (e.g., "10000-25000" or "50000+")
+  if (budgetStr.includes('-')) {
+    const [min, max] = budgetStr.split('-').map(Number);
+    if (!isNaN(min) && !isNaN(max)) {
+      return price >= min && price <= max;
+    }
+  } else if (budgetStr.endsWith('+')) {
+    const min = Number(budgetStr.slice(0, -1));
+    if (!isNaN(min)) {
+      return price >= min;
+    }
+  }
+
+  // 3. If budget format is unknown, default to including the item.
+  return true;
+};
+
+
 const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language, region, t }) => {
   const [appState, setAppState] = useState<AppState>('survey');
   const [currentStep, setCurrentStep] = useState(0);
@@ -25,6 +54,7 @@ const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language
   const [error, setError] = useState<string | null>(null);
   const [giftSuggestions, setGiftSuggestions] = useState<GiftSuggestion[]>([]);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
+  const [noMoreGiftsMessage, setNoMoreGiftsMessage] = useState<string | null>(null);
 
   const handleReset = () => {
     setAppState('survey');
@@ -32,6 +62,7 @@ const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language
     setAnswers({});
     setError(null);
     setGiftSuggestions([]);
+    setNoMoreGiftsMessage(null);
   };
 
   const fetchGifts = useCallback(async (finalAnswers: SurveyAnswers) => {
@@ -39,12 +70,24 @@ const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language
     setError(null);
     try {
       const suggestions = await getGiftSuggestions(finalAnswers, language);
+      
+      // Case 1: AI couldn't find anything at all.
       if (!suggestions || suggestions.length === 0) {
         setError(t.errorNoGiftsFound);
         setAppState('error');
         return;
       }
-      setGiftSuggestions(suggestions);
+      
+      const filteredSuggestions = suggestions.filter(gift => isPriceInBudget(gift.price, finalAnswers.budget));
+      
+      // Case 2: AI found gifts, but none matched the selected budget after filtering.
+      if (filteredSuggestions.length === 0) {
+        setError(t.errorNoGiftsInBudget);
+        setAppState('error');
+        return;
+      }
+
+      setGiftSuggestions(filteredSuggestions);
       setAppState('opening');
     } catch (err) {
       if (err instanceof Error) {
@@ -58,21 +101,23 @@ const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language
 
   const fetchMoreGifts = useCallback(async () => {
     setIsFetchingMore(true);
+    setNoMoreGiftsMessage(null);
     try {
       const newSuggestions = await getGiftSuggestions(answers, language, giftSuggestions);
-      if (newSuggestions && newSuggestions.length > 0) {
-        setGiftSuggestions(prev => [...prev, ...newSuggestions]);
+      const filteredNewSuggestions = newSuggestions.filter(gift => isPriceInBudget(gift.price, answers.budget));
+
+      if (filteredNewSuggestions && filteredNewSuggestions.length > 0) {
+        setGiftSuggestions(prev => [...prev, ...filteredNewSuggestions]);
       } else {
-        // Optional: Implement a toast or a small message indicating no more gifts were found.
-        console.log("No new gifts found.");
+        setNoMoreGiftsMessage(t.noMoreGiftsFound);
       }
     } catch (err) {
        console.error("Failed to fetch more gifts:", err);
-       // Optional: Show a small, non-disruptive error to the user
+       setNoMoreGiftsMessage(t.errorTitle); // Show a generic error on API failure
     } finally {
       setIsFetchingMore(false);
     }
-  }, [answers, language, giftSuggestions]);
+  }, [answers, language, giftSuggestions, t]);
 
   const handleNextStep = (answer: { id: keyof SurveyAnswers; value: string }) => {
     const newAnswers = { ...answers, [answer.id]: answer.value };
@@ -117,6 +162,7 @@ const HomePage: React.FC<HomePageProps> = ({ wishlist, onAddToWishlist, language
             wishlist={wishlist}
             onFetchMore={fetchMoreGifts}
             isFetchingMore={isFetchingMore}
+            noMoreGiftsMessage={noMoreGiftsMessage}
             t={t} 
           />
         );

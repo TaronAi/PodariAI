@@ -3,8 +3,9 @@ import { SurveyAnswers, GiftSuggestion, Language } from '../types';
 
 // Mapping language codes to full language names for the prompt
 const languageMap: Record<Language, string> = {
-  cy: 'Greek',
   en: 'English',
+  ru: 'Russian',
+  hy: 'Armenian',
 };
 
 export const getGiftSuggestions = async (
@@ -22,44 +23,51 @@ export const getGiftSuggestions = async (
       ? `Important: Please generate NEW and DIFFERENT gift ideas. Do not repeat any of the following already suggested gifts: ${existingSuggestions.map(g => `"${g.title}"`).join(', ')}.`
       : '';
 
-    const prompt = `
-      You are an expert gift-finding API for Cyprus. Your ONLY task is to return a valid JSON array of objects. Do not write any other text, markdown, or explanations.
+    // Create a more explicit budget constraint for the prompt
+    const budgetConstraint = answers.budget
+        ? `This is a HARD constraint. You MUST ONLY find gifts within the price range of "${answers.budget}" AMD. Do not suggest items outside this range.`
+        : 'The user has not specified a budget, so you can suggest gifts at any price point.';
 
-      Your goal is to find between 5 and 10 real-world gift ideas based on the user's preferences. You MUST ALWAYS return at least 5 suggestions, even if they are a broader match.
+    const prompt = `
+      You are an expert gift finder and web scraper for the Armenian market. Your task is to return a valid JSON array of gift ideas.
+
+      Your goal is to find between 5 and 10 real-world gift ideas based on the user's preferences.
       
       **CRITICAL INSTRUCTIONS:**
-      1.  **SEARCH EXCLUSIVELY ON "cyprusemall.com.cy"**. You MUST use your search tool and restrict it to this domain.
-      2.  **ALL URLs MUST BE VALID** and point to a product page on "https://www.cyprusemall.com.cy".
-      3.  **The response language for text fields ("title", "description") must be ${fullLanguageName}.**
-      4.  **The output MUST be a single, valid JSON array of objects.** Just the array.
+      1.  **SEARCH ON WILDBERRIES:** You MUST search for products on the Armenian version of Wildberries ("wildberries.am"). Use Google Search to find products on this specific site. The seller for all items will be "Wildberries".
+      2.  **URL VERIFICATION:** After finding a product URL, you must verify that it is a working, valid link to a product page and does not result in a 404 error. ALL URLs must be from "wildberries.am".
+      3.  **DATA EXTRACTION:**
+          *   **title:** Extract the full product title.
+          *   **description:** Create a compelling, short description of the gift.
+          *   **price:** Extract the price exactly as it's displayed, including the currency symbol (e.g., "5,900 ֏").
+          *   **url:** Provide the full, direct, and valid URL to the product page.
+          *   **imageUrl:** Find the primary product image URL.
+          *   **seller:** This should always be "Wildberries".
+      4.  **LANGUAGE:** The response language for text fields ("title", "description") must be ${fullLanguageName}.
+      5.  **FAILURE CASE:** If you absolutely cannot find any suitable gifts that meet the criteria after searching thoroughly, you MUST return an empty JSON array \`[]\`. **DO NOT** return an apology, explanation, or any text other than \`[]\`.
       
       ${existingSuggestionsConstraint}
       
-      **USER PREFERENCES (use these as a guide):**
+      **USER PREFERENCES:**
       - Gift for: ${answers.recipient || 'any'}
       - Occasion: ${answers.occasion || 'any'}
       - Gender: ${answers.gender || 'any'}
-      - Budget: ${answers.budget || 'any'}
+      - Budget (AMD): ${answers.budget || 'any'}
 
-      **HOW TO FIND GIFTS:**
-      1.  Analyze the user preferences as a guide for your search.
-      2.  Use your search tool to find suitable products on "site:cyprusemall.com.cy". Be creative with search terms based on the preferences.
-      3.  If you cannot find perfect matches, find popular and well-regarded items from the website that could be appropriate for the occasion.
-      4.  For each product, extract the exact title, a compelling description, the price as a string (e.g., "€49.99"), the full product URL, and a direct image URL.
-      5.  Format the result into the JSON structure below.
+      **BUDGET ENFORCEMENT:**
+      ${budgetConstraint}
 
-      **JSON OUTPUT FORMAT:**
-      Each object in the array must contain these exact keys: "title", "description", "price", "url", "imageUrl", "seller".
-      - "seller" MUST be "CyprusEmall".
-      
-      Example of one object:
+      **OUTPUT FORMAT:**
+      Your entire response MUST be a single, valid JSON array of objects. Do not include any text, markdown, or explanation before or after the JSON array.
+
+      The structure for each object in the array must be:
       {
-        "title": "Deluxe Wooden Backgammon Set",
-        "description": "A beautiful large wooden backgammon set for long afternoons at the local 'kafeneio' or at home.",
-        "price": "€45.00",
-        "url": "https://www.cyprusemall.com.cy/product/deluxe-backgammon-set-large/",
-        "imageUrl": "https://www.cyprusemall.com.cy/wp-content/uploads/2023/11/61Z6Q3Z3J7L._AC_SL1001_-300x300.jpg",
-        "seller": "CyprusEmall"
+        "title": "Product Title in ${fullLanguageName}",
+        "description": "Product description in ${fullLanguageName}.",
+        "price": "X,XXX ֏",
+        "url": "https://www.wildberries.am/product/...",
+        "imageUrl": "https://images.wbstatic.net/....jpg",
+        "seller": "Wildberries"
       }
     `;
 
@@ -71,40 +79,20 @@ export const getGiftSuggestions = async (
       },
     });
 
-    const rawText = response.text.trim();
+    let rawText = response.text.trim();
     if (!rawText) {
         throw new Error("The AI returned an empty response. Please try again.");
     }
     
-    let jsonString = '';
-    const markdownMatch = rawText.match(/```json\s*([\s\S]*?)\s*```/);
-
-    if (markdownMatch && markdownMatch[1]) {
-      // Extract from markdown code block if present
-      jsonString = markdownMatch[1];
-    } else {
-      // Otherwise, find the outermost array or object
-      const startIndex = rawText.indexOf('[');
-      const endIndex = rawText.lastIndexOf(']');
-      if (startIndex !== -1 && endIndex !== -1 && endIndex > startIndex) {
-        jsonString = rawText.substring(startIndex, endIndex + 1);
-      } else {
-          // Fallback for a single object response
-          const startObjIndex = rawText.indexOf('{');
-          const endObjIndex = rawText.lastIndexOf('}');
-          if (startObjIndex !== -1 && endObjIndex !== -1 && endObjIndex > startObjIndex) {
-              jsonString = rawText.substring(startObjIndex, endObjIndex + 1);
-          }
-      }
+    // Clean potential markdown formatting
+    if (rawText.startsWith('```json')) {
+        rawText = rawText.substring(7, rawText.length - 3).trim();
+    } else if (rawText.startsWith('```')) {
+        rawText = rawText.substring(3, rawText.length - 3).trim();
     }
-
-    if (!jsonString) {
-      console.error("Could not extract JSON from AI response:", rawText);
-      throw new Error("The AI returned a response that did not contain valid JSON. Please try again.");
-    }
-
+    
     try {
-        const suggestions = JSON.parse(jsonString.trim());
+        const suggestions = JSON.parse(rawText);
         
         if (!Array.isArray(suggestions)) {
           // Handle case where AI returns a single object instead of an array of one
@@ -116,7 +104,7 @@ export const getGiftSuggestions = async (
         
         return suggestions as GiftSuggestion[];
     } catch (parseError) {
-        console.error("Failed to parse JSON string:", jsonString, parseError);
+        console.error("Failed to parse JSON string:", rawText, parseError);
         throw new Error("The AI returned suggestions in an unexpected format. Please try again.");
     }
 

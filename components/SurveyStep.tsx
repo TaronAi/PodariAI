@@ -1,12 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
-// Corrected comments to accurately reflect the types being used.
 import { SurveyStepData, OptionType, SurveyAnswers, Language } from '../types';
 
 interface SurveyStepProps {
   stepData: SurveyStepData;
   onNext: (answer: { id: keyof SurveyAnswers; value: string }) => void;
-  // Prop type is correct, accepting 'cy' or 'en'.
   language: Language;
   t: {
     other: string;
@@ -17,9 +15,6 @@ interface SurveyStepProps {
 const SurveyStep: React.FC<SurveyStepProps> = ({ stepData, onNext, language, t }) => {
   const [isOtherInputVisible, setOtherInputVisible] = useState(false);
   const [otherValue, setOtherValue] = useState('');
-
-  // This logic correctly selects 'cy' or 'en' to match the LocalizedString type.
-  const langKey = language === 'cy' ? 'cy' : 'en';
 
   // Reset local state when the survey step (question) changes
   useEffect(() => {
@@ -48,7 +43,7 @@ const SurveyStep: React.FC<SurveyStepProps> = ({ stepData, onNext, language, t }
 
   return (
     <div className="flex flex-col items-center animate-fade-in">
-      <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-8 text-center">{stepData.question[langKey]}</h2>
+      <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-8 text-center">{stepData.question[language]}</h2>
       
       <div
         className={
@@ -70,12 +65,12 @@ const SurveyStep: React.FC<SurveyStepProps> = ({ stepData, onNext, language, t }
           >
             {stepData.type === OptionType.IMAGE && option.imageUrl && (
               <>
-                <img src={option.imageUrl} alt={option.label[langKey]} className="w-full h-48 object-cover" />
+                <img src={option.imageUrl} alt={option.label[language]} className="w-full h-48 object-cover" />
                 <div className="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-30 transition-all duration-300"></div>
-                <span className="absolute bottom-4 left-4 text-white text-lg font-bold">{option.label[langKey]}</span>
+                <span className="absolute bottom-4 left-4 text-white text-lg font-bold">{option.label[language]}</span>
               </>
             )}
-            {stepData.type === OptionType.TEXT && <span>{option.label[langKey]}</span>}
+            {stepData.type === OptionType.TEXT && <span>{option.label[language]}</span>}
           </button>
         ))}
 
