@@ -72,7 +72,7 @@ const Home: React.FC = () => {
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {products.map((product, idx) => (
+            {products.slice(0, 4).map((product, idx) => (
               <div 
                 key={product.id} 
                 className="opacity-0 animate-slide-up" 
